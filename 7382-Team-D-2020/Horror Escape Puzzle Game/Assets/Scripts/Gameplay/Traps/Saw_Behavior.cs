@@ -23,13 +23,15 @@ public class Saw_Behavior : MonoBehaviour
     [SerializeField] private Transform anchor;
     #endregion
 
-
+    private void Awake()
+    {
+        path = this.GetComponent<LineRenderer>();
+    }
 
     // Start is called before the first frame update
     private void Start()
     {
-        path = this.GetComponent<LineRenderer>();
-
+        
         path.startColor = path.endColor = Color.white;
         path.startWidth = path.endWidth = 0.1f;
         path.useWorldSpace = true;
@@ -38,9 +40,10 @@ public class Saw_Behavior : MonoBehaviour
         switch (behavior)
         {
             case Behavior.Translate:
-
+                this.gameObject.transform.position = anchor.position;
+                anchor.position = waypoints[0].position;
                 path.positionCount = waypoints.Length + 1;
-                DrawPath(); // Drawing it here cause only to be drawn once
+                DrawPath(); 
                 break;
 
 
@@ -49,7 +52,6 @@ public class Saw_Behavior : MonoBehaviour
                 path.positionCount = 2;
                 break;
         }
-       // Debug.Log(behavior.ToString());
 
     }
 
@@ -81,14 +83,13 @@ public class Saw_Behavior : MonoBehaviour
         {
             case Behavior.Translate:
 
-                Vector2 direction = (waypoints[targetWaypoint].position - this.gameObject.transform.position).normalized; 
-                Vector2 currentPos = this.transform.position;
+                Vector2 direction = (waypoints[targetWaypoint].position - anchor.position).normalized; 
+                Vector2 currentPos = anchor.position;
                 Vector2 destination = waypoints[targetWaypoint].position;
 
                 if (Vector2.Distance(currentPos, destination) >= 0.1f)
                 {
-                    this.gameObject.transform.Translate(direction * speed * Time.deltaTime);
-                    //Debug.Log(Vector2.Distance(currentPos, destination));
+                    anchor.Translate(direction * speed * Time.deltaTime);
                 }
                 else if (targetWaypoint + 1 < waypoints.Length) //prevent index out of range error
                 {
@@ -101,7 +102,7 @@ public class Saw_Behavior : MonoBehaviour
                     targetWaypoint = 0;
                     Debug.Log("Waypoint: " + targetWaypoint);
                 }
-                Debug.DrawRay(currentPos, waypoints[targetWaypoint].position - this.gameObject.transform.position);
+                Debug.DrawRay(currentPos, waypoints[targetWaypoint].position - anchor.position);
 
                 break;
 

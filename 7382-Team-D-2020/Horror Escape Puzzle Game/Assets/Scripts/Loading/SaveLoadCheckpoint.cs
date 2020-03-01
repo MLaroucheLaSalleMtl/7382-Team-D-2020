@@ -33,11 +33,11 @@ public class SaveLoadCheckpoint : MonoBehaviour
 
     private void SpawnPlayer() => Instantiate(playerObj, transform.position, transform.rotation).transform.parent = null;
 
-
     private void OnDestroy()
     {
         Destroy(this.gameObject);
     }
+
     public static Transform GetLastCheckpoint => lastCheckpointPos;
 
 }
