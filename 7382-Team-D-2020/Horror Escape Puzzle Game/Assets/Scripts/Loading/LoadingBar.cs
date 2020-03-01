@@ -19,9 +19,9 @@ public class LoadingBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!sceneLoader.IsLoaded())
+        if (!sceneLoader.IsLoaded)
         {
-            loadingBar.fillAmount = sceneLoader.Progress();
+            loadingBar.fillAmount = sceneLoader.Progress;
         }
 
     }

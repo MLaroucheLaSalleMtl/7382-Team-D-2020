@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.InputSystem;
 
 public class GameMenuManager : MonoBehaviour
@@ -50,16 +51,16 @@ public class GameMenuManager : MonoBehaviour
     public void OnPlayerDeath()
     {
         gm.RespawnPlayer();
-
         deathScreen.SetActive(true);
     }
-
-
 
     private void OnDestroy()
     {
         instance = null;
     }
-
+    private void OnApplicationQuit()
+    {
+        Destroy(this.gameObject);
+    }
     public static GameMenuManager GetInstance => instance;
 }

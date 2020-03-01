@@ -14,7 +14,7 @@ public class SaveLoadCheckpoint : MonoBehaviour
 
     private void Start()
     {
-        
+        SpawnPlayer();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,14 +27,17 @@ public class SaveLoadCheckpoint : MonoBehaviour
     {
         if (gameObject.transform.position.Equals(lastCheckpointPos.position))
         {
-            Instantiate(playerObj, transform.position, transform.rotation).transform.parent = null;
+            SpawnPlayer();
         }
     }
+
+    private void SpawnPlayer() => Instantiate(playerObj, transform.position, transform.rotation).transform.parent = null;
 
     private void OnDestroy()
     {
         Destroy(this.gameObject);
     }
+
     public static Transform GetLastCheckpoint => lastCheckpointPos;
 
 }

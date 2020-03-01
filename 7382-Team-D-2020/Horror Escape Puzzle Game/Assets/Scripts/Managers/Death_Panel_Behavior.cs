@@ -6,7 +6,6 @@ public class Death_Panel_Behavior : MonoBehaviour
 {
     [SerializeField] private Text deathTxt;
     [SerializeField] private float timeBeforeClosing;
-    // Start is called before the first frame update
 
 
     private void OnEnable()
@@ -18,7 +17,8 @@ public class Death_Panel_Behavior : MonoBehaviour
 
     private void ClosePanel()
     {
-        Debug.Log("Closing");
         this.gameObject.SetActive(false);
     }
+
+
 }
