@@ -14,17 +14,17 @@ public class PlayerInputs : MonoBehaviour
     [SerializeField] private float upwardsVelocity; //default of 5
 
     private bool hasJumped;
-
-    public void HasJumped() => hasJumped = false;
+    private bool canMove; // Better idea to tie this thing to death menu panel display timer
 
     private void Awake()
     {
         playerInputActions = new MyInputs();
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        canMove = false;
     }
 
     private void FixedUpdate()
@@ -32,10 +32,22 @@ public class PlayerInputs : MonoBehaviour
         this.gameObject.transform.Translate(Vector2.right * movement.x * speed * Time.deltaTime);
     }
 
+    private void OnEnable()
+    {
+        playerInputActions.Enable();
+        Invoke("CanMove", 1f);
+    }
+
+    private void OnDisable()
+    {
+        playerInputActions.Disable();
+    }
+
+
     public void OnMove(InputAction.CallbackContext context)
     {
 
-        if (context.performed)
+        if (context.performed && canMove)
         {
             playerInputActions.Player.Move.performed += callbackContext => movement = callbackContext.ReadValue<Vector2>();
         }
@@ -47,21 +59,13 @@ public class PlayerInputs : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started && !hasJumped)
+        if (context.started && !hasJumped && canMove)
         {
             rigid.AddForce(Vector2.up * upwardsVelocity, ForceMode2D.Impulse);
             hasJumped = true;
         }
     }
 
-
-    private void OnEnable()
-    {
-        playerInputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerInputActions.Disable();
-    }
+    public void HasJumped() => hasJumped = false;
+    private void CanMove() => canMove = true;
 }
