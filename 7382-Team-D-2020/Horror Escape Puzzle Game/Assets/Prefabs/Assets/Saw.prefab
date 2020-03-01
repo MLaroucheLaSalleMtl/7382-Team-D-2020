@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3916466091770486249}
   - component: {fileID: 3916466091770486254}
   - component: {fileID: 3916466091770486250}
+  - component: {fileID: 709038744}
   m_Layer: 0
   m_Name: Saw
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3916466091770486255}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.334465, y: 2.8192282, z: 9.538679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.334465, y: 2.8192282, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -92,10 +93,10 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3916466091770486255}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 0
+  m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
@@ -175,7 +176,7 @@ LineRenderer:
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
-    alignment: 0
+    alignment: 1
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
@@ -193,9 +194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e274c31c11f1c8c49b15d5566043629d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behavior: 0
+  behavior: 2
   waypoints: []
-  speed: 0
+  speed: 90
   anchor: {fileID: 0}
 --- !u!95 &3916466091770486250
 Animator:
@@ -216,3 +217,58 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!60 &709038744
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3916466091770486255}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3, y: 3}
+    newSize: {x: 3, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.91157436, y: 0.7808509}
+      - {x: 0.7147646, y: 0.82407236}
+      - {x: 0.31092548, y: 1.0218148}
+      - {x: 0.6547041, y: 1.2934699}
+      - {x: 0.2368269, y: 1.2503924}
+      - {x: -0.028014183, y: 1.0895238}
+      - {x: -0.47289753, y: 0.9902425}
+      - {x: -0.36035633, y: 1.4272265}
+      - {x: -0.66123295, y: 1.1231112}
+      - {x: -0.8125601, y: 0.7508769}
+      - {x: -1.038249, y: 0.37973166}
+      - {x: -1.2647047, y: 0.7681842}
+      - {x: -1.2382593, y: 0.25833654}
+      - {x: -1.1122446, y: 0.0042614937}
+      - {x: -1.0012197, y: -0.43459177}
+      - {x: -1.4002752, y: -0.32220888}
+      - {x: -1.1530733, y: -0.59646463}
+      - {x: -0.7561102, y: -0.7706113}
+      - {x: -0.4002676, y: -1.0206094}
+      - {x: -0.7544317, y: -1.2215562}
+      - {x: -0.028529167, y: -1.0947709}
+      - {x: 0.46646023, y: -0.9629121}
+      - {x: 0.3382635, y: -1.3849459}
+      - {x: 0.77794933, y: -0.72145987}
+      - {x: 1.0066214, y: -0.34541368}
+      - {x: 1.22, y: -0.72999996}
+      - {x: 1.2430239, y: -0.32378054}
+      - {x: 1.0574007, y: 0.06161928}
+      - {x: 0.9450693, y: 0.48398352}
+      - {x: 1.3970747, y: 0.40588522}
