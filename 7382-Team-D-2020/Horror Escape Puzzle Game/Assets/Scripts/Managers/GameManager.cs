@@ -29,8 +29,9 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        instance = null;
-    } 
+        instance = null; 
+    }
+
 
     /// <summary>
     /// Check if game is currently paused.
