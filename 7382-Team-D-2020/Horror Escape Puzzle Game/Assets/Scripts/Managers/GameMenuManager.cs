@@ -28,12 +28,6 @@ public class GameMenuManager : MonoBehaviour
         gm = GameManager.GetInstance;
     }
 
-
-    void Update()
-    {
-
-    }
-
     private void OnEscapeToggle(InputAction.CallbackContext context)
     {
         if (context.performed && gm.IsGamePaused)
@@ -58,9 +52,6 @@ public class GameMenuManager : MonoBehaviour
     {
         instance = null;
     }
-    private void OnApplicationQuit()
-    {
-        Destroy(this.gameObject);
-    }
+
     public static GameMenuManager GetInstance => instance;
 }
