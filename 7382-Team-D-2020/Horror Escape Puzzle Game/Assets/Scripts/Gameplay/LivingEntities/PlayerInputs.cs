@@ -5,25 +5,36 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerInputs : MonoBehaviour
 {
-    //private CmovementaracterController2D cmovementaracter;
-
     private Vector2 movement;
 
     private MyInputs playerInputActions;
     private Rigidbody2D rigid;
 
-    [SerializeField] private float speed;
-    [SerializeField] private float upwardsVelocity;
+    [SerializeField] private float speed; //default of 4
+    [SerializeField] private float upwardsVelocity; //default of 5
+
+    private bool hasJumped;
+
+    public void HasJumped() => hasJumped = false;
 
     private void Awake()
     {
         playerInputActions = new MyInputs();
-        
+    }
+
+    private void Start()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        this.gameObject.transform.Translate(Vector2.right * movement.x * speed * Time.deltaTime);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log("OnMove" + movement);
+
         if (context.performed)
         {
             playerInputActions.Player.Move.performed += callbackContext => movement = callbackContext.ReadValue<Vector2>();
@@ -36,25 +47,13 @@ public class PlayerInputs : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Debug.Log("Jumping");
-        if (context.started)
+        if (context.started && !hasJumped)
         {
             rigid.AddForce(Vector2.up * upwardsVelocity, ForceMode2D.Impulse);
+            hasJumped = true;
         }
     }
 
-    // Start is called before tmovemente first frame update
-    void Start()
-    {
-
-       rigid = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-         this.gameObject.transform.Translate(Vector2.right * movement.x * speed * Time.deltaTime);
-    }
 
     private void OnEnable()
     {

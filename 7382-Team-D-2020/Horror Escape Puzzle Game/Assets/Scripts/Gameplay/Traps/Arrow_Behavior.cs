@@ -26,7 +26,6 @@ public class Arrow_Behavior : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         transform.parent = null;
-
     }
 
     private void FixedUpdate()
@@ -57,7 +56,6 @@ public class Arrow_Behavior : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody2D>().mass = 0f;
             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = this.gameObject.GetComponent<Rigidbody2D>().velocity;
-            //collision.gameObject.GetComponent<Transform>().position = this.transform.position;
         }
         else
         {

@@ -1,25 +1,64 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Player_Behavior : MonoBehaviour, IDeath
 {
-    private UnityEvent OnDeath = new UnityEvent();
-
+    private UnityEvent OnDeath;
+    [HideInInspector] public UnityEvent OnLand;
     private GameMenuManager gmm;
+
+    private RaycastHit2D rayRight, rayLeft;
+
+    //Not Sure if to be kept
+    private bool isRightWall, isLeftWall;
+
+    private void Awake()
+    {
+        OnDeath = new UnityEvent();
+        OnLand = new UnityEvent();
+
+    }
 
     private void Start()
     {
         gmm = GameMenuManager.GetInstance;
-
         OnDeath.AddListener(gmm.OnPlayerDeath);
-
+        OnLand.AddListener(this.gameObject.GetComponent<PlayerInputs>().HasJumped);
     }
+
+    private void Update()
+    {
+        CheckCollisionRight();
+        CheckCollisionLeft();
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.collider.CompareTag("Ground")) Death();
+        else Land();
+    }
+
+    public void Land()
+    {
+        OnLand?.Invoke();
+    }
+
+    private void CheckCollisionRight()
+    {
+        rayRight = Physics2D.Raycast(this.gameObject.transform.position, Vector2.right * 2);
+
+        if (rayRight.collider.CompareTag("Ground")) { isRightWall = true; Debug.Log("Colli right"); }
+        else isRightWall = false;
+    }
+
+    private void CheckCollisionLeft()
+    {
+        rayLeft = Physics2D.Raycast(this.gameObject.transform.position, Vector2.left * 2);
+
+        if (rayLeft.collider.CompareTag("Ground")) { isLeftWall = true; Debug.Log("Colli left"); }
+        else isLeftWall = false;
     }
 
     public void Death()
@@ -33,6 +72,7 @@ public class Player_Behavior : MonoBehaviour, IDeath
 
     private void OnDestroy()
     {
+        CurrentSessionPlayerData.Life--;
         //BUG: Might cause to have 2 players and cameras on the screen;
         OnDeath.Invoke();
     }
