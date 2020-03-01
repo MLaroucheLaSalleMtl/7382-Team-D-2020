@@ -1,28 +1,14 @@
 ﻿
 using UnityEngine;
 
-public class CurrentSessionPlayerData : MonoBehaviour
+public static class CurrentSessionPlayerData
 {
-    [HideInInspector] public CurrentSessionPlayerData Instance = null;
     
-    [Tooltip("If this number goes negative, it is intended.")]
-    [HideInInspector]public static int Life;
+    private static int life = 5; //default 5 lifes per session, num can go negative
 
-    private void Awake()
+    public static int Life
     {
-        if (!(Instance is null) && Instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        Instance = this;
-    } //Singleton
-
-
-
-    private void Start()
-    {
-        Life = 10;
+        get => life;
+        set => life = value > life? life : value;
     }
-
-
 }

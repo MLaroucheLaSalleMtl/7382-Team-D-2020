@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public static class PlayerData 
 {
 
     //Here is a file that contains all the necessary data to the game.
@@ -30,18 +30,7 @@ public class PlayerData : MonoBehaviour
     public static int DeathByFall { get => deathByFall; set => deathByFall = value; }
     public static int DeathBySuicide { get => deathBySuicide; set => deathBySuicide = value; }
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-
-    private void Start()
-    {
-        LoadInitialData();
-    }
-
-    private void LoadInitialData()
+    private static void LoadInitialData()
     {
         numLevelUnlocked = PlayerPrefs.GetInt("NumLevelsUnlocked");
 

@@ -15,14 +15,4 @@ public class Camera_Behavior : MonoBehaviour
         audioS = GetComponent<AudioListener>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    public void FindandAttachOnPlayer()
-    {
-        //this.enabled = audioS.enabled = cam.enabled = true;
-    }
-
 }

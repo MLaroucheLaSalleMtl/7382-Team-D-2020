@@ -19,6 +19,7 @@ public class Saw_Behavior : MonoBehaviour
 
 
     //For the saw orbit
+    [Tooltip("Create an Anchor, then make Saw a child of Anchor.")]
     [SerializeField] private Transform anchor;
     #endregion
 
