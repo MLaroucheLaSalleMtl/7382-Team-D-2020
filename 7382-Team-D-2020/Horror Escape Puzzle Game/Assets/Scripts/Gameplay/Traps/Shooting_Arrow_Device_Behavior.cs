@@ -31,42 +31,35 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         projectile.GetComponent<Arrow_Behavior>().Homing = false;
+
         ModeSelection();
-        Debug.Log("delay: " + delay + " repeat: " + repeatRate + " mode: " + firingMode + " Homing:" + projectile.GetComponent<Arrow_Behavior>().Homing);
     }
 
     private void ModeSelection()
     {
-        Debug.Log("Update");
         switch (firingMode)
         {
-            case FiringMode.Auto: // Automatic
-                Debug.Log("Automatic") ;
+            case FiringMode.Auto:
                 InvokeRepeating("Fire", delay, repeatRate);
                 break;
 
-            case FiringMode.Trigger: // Trigger
+            case FiringMode.Trigger: 
             case FiringMode.TriggerHoming:
-                Debug.Log("trigger");
                 this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 break;
 
-            case FiringMode.Burst: // Burst
+            case FiringMode.Burst:  // kind of useless
                 //shoot 3 arrows in succession
-                Debug.Log("burst");
                 InvokeRepeating("Burst", delay, repeatRate);
                 break;
 
-            case FiringMode.Rand: //Random
-                Debug.Log("rng");
+            case FiringMode.Rand: 
                 InvokeRepeating("Fire", Random.Range(0f, 5f), Random.Range(0f, 5f));
                 break;
 
-            case FiringMode.Homing: // Homing //Can be deleted if finish with debug
-                Debug.Log("hoomin");
+            case FiringMode.Homing: 
                 goto case FiringMode.Auto;
         }
     }
@@ -81,13 +74,13 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
         projectile.GetComponent<Arrow_Behavior>().Speed = (firingMode != FiringMode.Trigger)? this.arrowSpeed: this.arrowSpeed * 2f;
         projectile.GetComponent<Rigidbody2D>().velocity = Vector2.up * 10f;
         if(firingMode == FiringMode.Homing) projectile.GetComponent<Arrow_Behavior>().Homing = true;
-        Instantiate(projectile, this.gameObject.transform);
+        Instantiate(projectile, this.gameObject.transform.position, this.gameObject.transform.rotation);
         
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player")) Debug.Log("fire trigger"); Fire();
+        if(collision.CompareTag("Player")) Fire();
 
     }
 

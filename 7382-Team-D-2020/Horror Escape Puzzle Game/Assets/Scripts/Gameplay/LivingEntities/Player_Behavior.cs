@@ -68,7 +68,7 @@ public class Player_Behavior : MonoBehaviour, IDeath
         //if trigger enter on fire/lava/laser - gets fried to a crisp
         //if bomb vest explodes - blood flies everywhere + screen shake?
         CurrentSessionPlayerData.Life--;
-        OnDeath.Invoke();
+        OnDeath?.Invoke();
         Destroy(this.gameObject);
 
     }

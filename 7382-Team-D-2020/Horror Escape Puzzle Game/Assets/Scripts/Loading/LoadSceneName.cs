@@ -1,6 +1,4 @@
 ﻿
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +8,7 @@ public class LoadSceneName : MonoBehaviour
 
     [Tooltip("Enter the Scene Name you want to load")]
     [SerializeField] private string sceneName;
-
+    [SerializeField] private bool activateScene;
     private AsyncOperation async;
 
 
@@ -18,7 +16,7 @@ public class LoadSceneName : MonoBehaviour
     private void Start()
     {
         async = SceneManager.LoadSceneAsync(sceneName);
-        async.allowSceneActivation = false;
+        async.allowSceneActivation = activateScene;
     }
 
     /// <summary>

@@ -3,6 +3,7 @@ using UnityEditor;
 
 
 [CustomEditor(typeof(Shooting_Arrow_Device_Behavior))]
+[CanEditMultipleObjects]
 public class Custom_Shooting_Device_Editor : Editor
 {
 
@@ -41,7 +42,7 @@ public class Custom_Shooting_Device_Editor : Editor
             using (var group = new EditorGUILayout.FadeGroupScope(1f))
             {
                 EditorGUI.indentLevel++;
-                repeatRate.floatValue = EditorGUILayout.Slider("Delay between shots", repeatRate.floatValue, 1, 0);
+                repeatRate.floatValue = EditorGUILayout.Slider("Delay between shots", repeatRate.floatValue, 5, 0);
                 delay.floatValue = EditorGUILayout.Slider("Initial Delay", delay.floatValue, 0, 10);
                 if(mode == 3) burstDelay.floatValue = EditorGUILayout.Slider("Burst Delay", burstDelay.floatValue, 0, 10);
             }

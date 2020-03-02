@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -12,26 +10,31 @@ public class Arrow_Behavior : MonoBehaviour
 
     private Transform trackedObjPos;
     private Rigidbody2D rigid;
-
+    private Collider2D coll;
 
     public float Speed { set => speed = value; }
     public bool Homing { get => homing;  set => homing = value; }
 
     private void Awake()
     {
-        if (homing) trackedObjPos = GameObject.FindGameObjectWithTag("Player").transform;
+        rigid = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
     }
 
     private void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        if (homing) trackedObjPos = GameObject.FindGameObjectWithTag("Player").transform;
+        
         transform.parent = null;
     }
 
     private void FixedUpdate()
     {
         if (homing) HomingToTarget();
-        else if(rigid != null) rigid.velocity = Vector2.up * this.speed * 100 * Time.deltaTime;
+        else if (rigid != null)
+        {
+            rigid.velocity = this.gameObject.transform.up * this.speed * 100 * Time.deltaTime;
+        } 
     }
 
 
@@ -56,12 +59,13 @@ public class Arrow_Behavior : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody2D>().mass = 0f;
             collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = this.gameObject.GetComponent<Rigidbody2D>().velocity;
+            collision.GetComponent<Player_Behavior>().Death();
         }
         else
         {
             Destroy(rigid);
             Destroy(this);
-            Destroy(gameObject.GetComponent<Collider2D>());
+            Destroy(coll);
         }
     }
 
