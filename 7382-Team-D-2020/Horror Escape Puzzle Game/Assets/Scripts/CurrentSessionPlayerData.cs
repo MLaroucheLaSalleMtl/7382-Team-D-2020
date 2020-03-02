@@ -1,6 +1,4 @@
 ﻿
-using UnityEngine;
-
 public static class CurrentSessionPlayerData
 {
     

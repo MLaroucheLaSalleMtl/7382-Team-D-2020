@@ -67,13 +67,16 @@ public class Player_Behavior : MonoBehaviour, IDeath
         //if only collision with spikes - gets stuck at that position and piss blood
         //if trigger enter on fire/lava/laser - gets fried to a crisp
         //if bomb vest explodes - blood flies everywhere + screen shake?
+        CurrentSessionPlayerData.Life--;
+        OnDeath?.Invoke();
         Destroy(this.gameObject);
+
     }
 
-    private void OnDestroy()
-    {
-        CurrentSessionPlayerData.Life--;
-        //BUG: Might cause to have 2 players and cameras on the screen;
-        OnDeath.Invoke();
-    }
+    //private void OnDestroy()
+    //{
+        
+    //    //BUG: Might cause to have 2 players and cameras on the screen;
+         // it is not might lol, it is it does cause random player to be spawned due to event
+    //}
 }

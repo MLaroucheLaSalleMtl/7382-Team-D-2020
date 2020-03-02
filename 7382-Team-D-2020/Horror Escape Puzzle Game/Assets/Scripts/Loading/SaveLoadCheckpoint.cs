@@ -2,8 +2,7 @@
 using UnityEngine;
 
 
-//If you are looking for SaveLoad script, it is this one
-// I've changed a few things
+
 
 [RequireComponent(typeof(EdgeCollider2D))]
 public class SaveLoadCheckpoint : MonoBehaviour
@@ -19,8 +18,7 @@ public class SaveLoadCheckpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("trigger");
-        if (collision.CompareTag("Player")) lastCheckpointPos = this.gameObject.transform; 
+        if (collision.CompareTag("Player")) lastCheckpointPos = this.gameObject.transform;
     }
 
     public void Respawn()
@@ -31,11 +29,9 @@ public class SaveLoadCheckpoint : MonoBehaviour
         }
     }
 
-    private void SpawnPlayer() => Instantiate(playerObj, transform.position, transform.rotation).transform.parent = null;
-
-    private void OnDestroy()
-    {
-        Destroy(this.gameObject);
+    private void SpawnPlayer() 
+    { 
+        Instantiate(playerObj, transform.position, transform.rotation).transform.parent = null;
     }
 
     public static Transform GetLastCheckpoint => lastCheckpointPos;
