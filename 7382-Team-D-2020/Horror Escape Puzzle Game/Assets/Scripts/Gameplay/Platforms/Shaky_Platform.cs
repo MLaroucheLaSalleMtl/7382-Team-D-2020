@@ -15,11 +15,15 @@ public class Shaky_Platform : MonoBehaviour
     [Range(1f,10f)]
     [SerializeField] private float gravity;
 
-    private void Start()
+
+    private void Awake()
     {
         coll = GetComponent<BoxCollider2D>();
         rigid = GetComponent<Rigidbody2D>();
 
+    }
+    private void Start()
+    {
         rigid.bodyType = RigidbodyType2D.Static; 
     }
 
@@ -34,5 +38,13 @@ public class Shaky_Platform : MonoBehaviour
         rigid.gravityScale = gravity;
         rigid.angularVelocity = Random.Range(-180f, 180f);
         coll.enabled = false;
+
+        Invoke("Delete", 3f);
     }
+
+    private void Delete()
+    {
+        Destroy(this.gameObject);
+    }
+
 }

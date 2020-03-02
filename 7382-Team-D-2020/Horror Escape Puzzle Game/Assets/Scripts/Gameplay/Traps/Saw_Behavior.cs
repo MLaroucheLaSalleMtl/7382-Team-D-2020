@@ -93,12 +93,10 @@ public class Saw_Behavior : MonoBehaviour
                 {
                     //Previous waypoint reached. Going to the next one.
                     targetWaypoint++;
-                    Debug.Log("Waypoint: " + targetWaypoint);
                 }
                 else if (targetWaypoint == waypoints.Length - 1)
                 {
                     targetWaypoint = 0;
-                    Debug.Log("Waypoint: " + targetWaypoint);
                 }
                 Debug.DrawRay(currentPos, waypoints[targetWaypoint].position - anchor.position);
 

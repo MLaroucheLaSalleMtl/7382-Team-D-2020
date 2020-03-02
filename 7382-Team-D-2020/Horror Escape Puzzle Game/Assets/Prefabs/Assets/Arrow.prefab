@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4533067963636316934}
   - component: {fileID: -1490065549278372617}
   - component: {fileID: 8652306662925729371}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bb7205a3aa5314a8f15a23f0d2414b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  homing: 1
+  speed: 10
+  homing: 0
 --- !u!50 &-1490065549278372617
 Rigidbody2D:
   serializedVersion: 4
