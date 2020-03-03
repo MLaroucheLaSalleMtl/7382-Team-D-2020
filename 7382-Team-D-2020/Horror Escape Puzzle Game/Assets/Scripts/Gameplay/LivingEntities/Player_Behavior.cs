@@ -47,7 +47,8 @@ public class Player_Behavior : MonoBehaviour, IDeath
 
     private void CheckCollisionRight()
     {
-        rayRight = Physics2D.Raycast(this.gameObject.transform.position, Vector2.right * 2);
+        rayRight = Physics2D.Raycast(this.gameObject.transform.position, Vector2.right * 0.6f);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.right * 0.6f), Color.yellow);
 
         if (rayRight.collider.CompareTag("Ground")) { isRightWall = true; Debug.Log("Colli right"); }
         else isRightWall = false;
@@ -55,9 +56,9 @@ public class Player_Behavior : MonoBehaviour, IDeath
 
     private void CheckCollisionLeft()
     {
-        rayLeft = Physics2D.Raycast(this.gameObject.transform.position, Vector2.left * 2);
-
-        if (rayLeft.collider.CompareTag("Ground")) { isLeftWall = true; Debug.Log("Colli left"); }
+        rayLeft = Physics2D.Raycast(this.gameObject.transform.position, Vector2.left * 0.6f);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left * 0.6f), Color.red);
+        if (rayLeft.collider.CompareTag("Test")) { isLeftWall = true; Debug.Log("Colli left"); }
         else isLeftWall = false;
     }
 

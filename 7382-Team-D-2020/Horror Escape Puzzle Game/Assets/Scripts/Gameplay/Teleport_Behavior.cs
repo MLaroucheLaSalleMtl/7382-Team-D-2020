@@ -17,6 +17,14 @@ public class Teleport_Behavior : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && nextScene.IsLoaded) nextScene.ActivateScene();
+
+
+        Debug.Log(nextScene.IsLoaded);
+        if (collision.CompareTag("Player")) Debug.Log("Player");
+        if (collision.CompareTag("Player") && nextScene.IsLoaded)
+        {
+            Debug.Log("Activatea");
+            nextScene.ActivateScene();
+        }
     }
 }
