@@ -14,6 +14,10 @@ Left -> A
 
 Right -> D
 
+### Controller
+Movements -> Left Stick
+Jump -> South Button
+
 
 ## Used External Assets Sources
 
