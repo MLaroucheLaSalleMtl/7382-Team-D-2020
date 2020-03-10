@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71555a4ed6f4e4c419554a000f830dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObj: {fileID: 1232439465686061066, guid: ae22883a94cff2848aa094b8ca604b24,
+  playerObj: {fileID: 2601472234466358501, guid: af20a8b6e2a99754aaa51d1b7c6ae053,
     type: 3}
 --- !u!68 &4229278483389954129
 EdgeCollider2D:
