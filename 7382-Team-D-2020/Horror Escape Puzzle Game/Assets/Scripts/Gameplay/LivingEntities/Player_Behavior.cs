@@ -2,22 +2,28 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player_Behavior : MonoBehaviour, IDeath
+public static class Player
+{
+
+    private static int life = 5; //default 5 lifes per session, num can go negative
+
+    public static int Life
+    {
+        get => life;
+        set => life = value > life ? life : value;
+    }
+}
+
+public class Player_Behavior : MonoBehaviour
 {
     private UnityEvent OnDeath;
     [HideInInspector] public UnityEvent OnLand;
     private GameMenuManager gmm;
 
-    private RaycastHit2D rayRight, rayLeft;
-
-    //Not Sure if to be kept
-    private bool isRightWall, isLeftWall;
-
     private void Awake()
     {
         OnDeath = new UnityEvent();
         OnLand = new UnityEvent();
-
     }
 
     private void Start()
@@ -26,13 +32,6 @@ public class Player_Behavior : MonoBehaviour, IDeath
         OnDeath.AddListener(gmm.OnPlayerDeath);
         OnLand.AddListener(this.gameObject.GetComponent<PlayerInputs>().HasJumped);
     }
-
-    private void Update()
-    {
-        CheckCollisionRight();
-        CheckCollisionLeft();
-    }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -45,39 +44,18 @@ public class Player_Behavior : MonoBehaviour, IDeath
         OnLand?.Invoke();
     }
 
-    private void CheckCollisionRight()
-    {
-        rayRight = Physics2D.Raycast(this.gameObject.transform.position, Vector2.right * 0.6f);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.right * 0.6f), Color.yellow);
-
-        if (rayRight.collider.CompareTag("Ground")) { isRightWall = true; Debug.Log("Colli right"); }
-        else isRightWall = false;
-    }
-
-    private void CheckCollisionLeft()
-    {
-        rayLeft = Physics2D.Raycast(this.gameObject.transform.position, Vector2.left * 0.6f);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left * 0.6f), Color.red);
-        if (rayLeft.collider.CompareTag("Test")) { isLeftWall = true; Debug.Log("Colli left"); }
-        else isLeftWall = false;
-    }
-
     public void Death()
     {
         Debug.Log("player death");
         //if only collision with spikes - gets stuck at that position and piss blood
         //if trigger enter on fire/lava/laser - gets fried to a crisp
         //if bomb vest explodes - blood flies everywhere + screen shake?
-        CurrentSessionPlayerData.Life--;
-        OnDeath?.Invoke();
+        Player.Life--;
         Destroy(this.gameObject);
-
     }
 
-    //private void OnDestroy()
-    //{
-        
-    //    //BUG: Might cause to have 2 players and cameras on the screen;
-         // it is not might lol, it is it does cause random player to be spawned due to event
-    //}
+    private void OnDestroy()
+    {
+        OnDeath?.Invoke();
+    }
 }

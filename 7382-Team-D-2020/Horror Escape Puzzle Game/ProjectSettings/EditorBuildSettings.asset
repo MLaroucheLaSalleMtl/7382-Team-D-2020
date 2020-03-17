@@ -23,12 +23,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneToLoad.unity
     guid: 7634a9d351b8c194f99ed6e5f8a8e10a
-  - enabled: 1
-    path: Assets/Scenes/CreditSetion.unity
-    guid: 40c6880f319ca2b4cb5eef1c399a8656
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/ToBeContinued.unity
     guid: 21460089d389ece44a1f2ecc6887e4cf
+  - enabled: 1
+    path: Assets/Scenes/CreditsScene.unity
+    guid: c6f2ebfdfda58874484b09f8ae196f28
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5e7a23196f59dc9438401d3be067cb4e,
       type: 2}

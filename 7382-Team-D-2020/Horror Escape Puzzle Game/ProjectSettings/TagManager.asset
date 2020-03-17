@@ -10,7 +10,7 @@ TagManager:
   - Checkpoint
   - Arrow
   - Saw
-  - Test
+  - EventSystem
   layers:
   - Default
   - TransparentFX

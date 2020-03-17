@@ -9,7 +9,7 @@ public class Death_Panel_Behavior : MonoBehaviour
 
     private void OnEnable()
     {
-        deathTxt.text = "" + CurrentSessionPlayerData.Life;
+        deathTxt.text = "" + Player.Life;
         Invoke("ClosePanel", timeBeforeClosing);
 
     }
