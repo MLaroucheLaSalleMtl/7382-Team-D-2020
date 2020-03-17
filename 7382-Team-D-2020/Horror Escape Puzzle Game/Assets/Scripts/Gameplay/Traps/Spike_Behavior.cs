@@ -32,10 +32,7 @@ public class Spike_Behavior : MonoBehaviour
         {
             collision.gameObject.GetComponent<Player_Behavior>().Death();
         }
-        else if (collision.gameObject.CompareTag("Monster"))
-        {
-            collision.gameObject.GetComponent<Monster_Behavior>().Death();
-        }
+      
     }
 
 

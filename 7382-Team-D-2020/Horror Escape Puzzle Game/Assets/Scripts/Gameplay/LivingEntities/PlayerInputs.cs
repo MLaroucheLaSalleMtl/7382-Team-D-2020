@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,7 +8,7 @@ public class PlayerInputs : MonoBehaviour
 
     private MyInputs playerInputActions;
     private Rigidbody2D rigid;
-
+    private Animator anim;
     [SerializeField] private float speed; //default of 4
     [SerializeField] private float upwardsVelocity; //default of 5
 
@@ -20,6 +19,7 @@ public class PlayerInputs : MonoBehaviour
     {
         playerInputActions = new MyInputs();
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -50,25 +50,29 @@ public class PlayerInputs : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-
         if (context.performed && canMove)
         {
             movement = context.ReadValue<Vector2>();
+            anim.SetFloat("h", movement.x);
         }
         else
         {
+            anim.SetFloat("h", 0f);
             movement = Vector2.zero;
         }
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Debug.Log(!hasJumped + " " + canMove + " " + context.performed + " " + context.started);
         if (context.performed && !hasJumped && canMove)
         {
-            Debug.Log("Jump");
+            anim.SetBool("jump", true);
             rigid.AddForce(Vector2.up * upwardsVelocity, ForceMode2D.Impulse);
             hasJumped = true;
+        }
+        else
+        {
+            anim.SetBool("jump", false);
         }
     }
 

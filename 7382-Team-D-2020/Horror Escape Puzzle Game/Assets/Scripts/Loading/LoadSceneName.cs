@@ -39,4 +39,12 @@ public class LoadSceneName : MonoBehaviour
     {
         if(IsLoaded)async.allowSceneActivation = true;
     }
+
+    /// <summary>
+    /// Bypass async loading.
+    /// </summary>
+    public void LoadSceneDirectly(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
 }

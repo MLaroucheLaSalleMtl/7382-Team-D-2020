@@ -47,7 +47,7 @@ public class @MyInputs : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e2c281d4-c8d7-4158-ad2f-92e0a7507509"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
