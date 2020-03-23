@@ -654,7 +654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: MainMenuScene
   activateScene: 0
-  fadeOutAnim: {fileID: 0}
+  fadeOutAnim: {fileID: 1552198695}
 --- !u!1 &768341782
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +991,12 @@ CanvasRenderer:
 --- !u!224 &1542914127 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9060969123789679381, guid: 19e48b7e0488aaa4b9cea6d0c0f6510b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2125054386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1552198695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9060969123789679380, guid: 19e48b7e0488aaa4b9cea6d0c0f6510b,
     type: 3}
   m_PrefabInstance: {fileID: 2125054386}
   m_PrefabAsset: {fileID: 0}

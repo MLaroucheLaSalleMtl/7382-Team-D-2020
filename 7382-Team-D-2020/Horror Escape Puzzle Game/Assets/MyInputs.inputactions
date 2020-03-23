@@ -11,20 +11,12 @@
                     "id": "c6f47f5a-5043-4f96-a541-13a52675eb68",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Hold"
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Jump",
                     "type": "PassThrough",
                     "id": "3f60b098-f728-439f-8904-0457e42593ff",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press"
-                },
-                {
-                    "name": "Bomb",
-                    "type": "PassThrough",
-                    "id": "fef42707-3a9d-4d37-9d57-ec7d60a3d438",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
@@ -50,50 +42,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "50398670-bb2c-4a43-898c-c5d97df7dee7",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Bomb",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d525d77b-4ea5-48d9-8289-3c5eb71cee97",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Bomb",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6e0c0ee8-c45b-4652-a75a-02ec14c753b8",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Bomb",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9156bd67-52f2-4b64-9184-83637cbcc590",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Bomb",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

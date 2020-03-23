@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 9060969123789679383}
   - component: {fileID: 9060969123789678826}
   m_Layer: 5
-  m_Name: Transition_Fade_In
+  m_Name: Transition_Fade_Out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9060969123789679381
 RectTransform:
   m_ObjectHideFlags: 0
