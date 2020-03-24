@@ -25,7 +25,7 @@ public class CreditsManager : MonoBehaviour
     {
         curTime += Time.deltaTime;
 
-        if (curTime - 2f >= audioS.clip.length)
+        if (curTime - 2f >= audioS.clip.length) 
         {
             script.LoadSceneDirectly("MainMenuScene");
         }

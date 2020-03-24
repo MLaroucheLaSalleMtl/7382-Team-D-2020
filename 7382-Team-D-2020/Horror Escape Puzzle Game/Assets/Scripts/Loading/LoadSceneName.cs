@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +10,8 @@ public class LoadSceneName : MonoBehaviour
     [SerializeField] private string sceneName;
     [SerializeField] private bool activateScene;
     private AsyncOperation async;
-
+    [SerializeField] private GameObject fadeOutAnim;
+    private float waitForSeconds = 1.2f;
 
     // Start is called before the first frame update
     private void Start()
@@ -37,7 +38,7 @@ public class LoadSceneName : MonoBehaviour
     /// </summary>
     public void ActivateScene()
     {
-        if(IsLoaded)async.allowSceneActivation = true;
+        StartCoroutine("WaitForActivateScene");
     }
 
     /// <summary>
@@ -45,6 +46,20 @@ public class LoadSceneName : MonoBehaviour
     /// </summary>
     public void LoadSceneDirectly(string name)
     {
+        StartCoroutine("WaitForLoadSceneDirectly", name);
+    }
+
+
+    private IEnumerator WaitForLoadSceneDirectly(string name)
+    {
+        fadeOutAnim.SetActive(true);
+        yield return new WaitForSeconds(waitForSeconds);
         SceneManager.LoadScene(name);
+    }
+    private IEnumerator WaitForActivateScene()
+    {
+        fadeOutAnim.SetActive(true);
+        yield return new WaitForSeconds(waitForSeconds);
+        if (IsLoaded) async.allowSceneActivation = true;
     }
 }
