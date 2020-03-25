@@ -2047,6 +2047,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3335941660395050857, guid: 6eaf704f99501f544bf1576374bd3512,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ControlMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335941660395050857, guid: 6eaf704f99501f544bf1576374bd3512,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5503199886730337089, guid: 6eaf704f99501f544bf1576374bd3512,
         type: 3}
       propertyPath: m_Name

@@ -1,9 +1,6 @@
 ﻿
 using UnityEngine;
 
-
-
-
 [RequireComponent(typeof(EdgeCollider2D))]
 public class SaveLoadCheckpoint : MonoBehaviour
 {
@@ -19,6 +16,7 @@ public class SaveLoadCheckpoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")) lastCheckpointPos = this.gameObject.transform;
+        if (collision.CompareTag("TestDummy")) lastCheckpointPos = this.gameObject.transform;
     }
 
     public void Respawn()
