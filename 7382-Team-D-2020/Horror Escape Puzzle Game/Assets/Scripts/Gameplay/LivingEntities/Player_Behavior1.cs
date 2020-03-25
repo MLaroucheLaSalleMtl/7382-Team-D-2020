@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public static class Player1
 {
 
@@ -14,34 +15,51 @@ public static class Player1
     }
 }
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player_Behavior1 : MonoBehaviour
 {
     private UnityEvent OnDeath;
-    [HideInInspector] public UnityEvent OnLand;
+
     private GameMenuManager gmm;
+    private Rigidbody2D rigid;
+
+    private Vector2 movement;
+
+    [SerializeField] private float speed; //default of 4
+    [SerializeField] private float upwardsVelocity; //default of 5
+
+    private bool canJump = true;
 
     private void Awake()
     {
         OnDeath = new UnityEvent();
-        OnLand = new UnityEvent();
+
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
         gmm = GameMenuManager.GetInstance;
         OnDeath.AddListener(gmm.OnPlayerDeath);
-        OnLand.AddListener(this.gameObject.GetComponent<PlayerInputs1>().HasJumped);
+    }
+    private void FixedUpdate()
+    {
+        rigid.AddForce(transform.right * speed * movement);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.collider.CompareTag("Ground")) Death();
-        else Land();
+        else canJump = true;
     }
 
-    public void Land()
+    public void Jump()
     {
-        OnLand?.Invoke();
+        if (canJump)
+        {
+            rigid.AddForce(transform.up * upwardsVelocity, ForceMode2D.Impulse);
+            canJump = false;
+        }
     }
 
     public void Death()
@@ -54,4 +72,8 @@ public class Player_Behavior1 : MonoBehaviour
     {
         OnDeath?.Invoke();
     }
+
+
+    public void SetMovement(Vector2 direction) => movement = direction;
+
 }

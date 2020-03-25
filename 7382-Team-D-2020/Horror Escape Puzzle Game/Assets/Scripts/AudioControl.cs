@@ -27,22 +27,22 @@ public class AudioControl : MonoBehaviour
 
     public void ControlMaster(float sliderValue)
     {
-        audioM.SetFloat("volMaster", Mathf.Log10(sliderValue) * 20);
+        audioM.SetFloat("volMaster", sliderValue);
     }
 
     public void ControlSFX(float sliderValue)
     {
-        audioM.SetFloat("volSFX", Mathf.Log10(sliderValue) * 20);
+        audioM.SetFloat("volSFX", sliderValue);
     }
 
     public void ControlMusic(float sliderValue)
     {
-        audioM.SetFloat("volMusic", Mathf.Log10(sliderValue) * 20);
+        audioM.SetFloat("volMusic",sliderValue);
     }
 
     public void ControlUI(float sliderValue)
     {
-        audioM.SetFloat("volUI", Mathf.Log10(sliderValue) * 20);
+        audioM.SetFloat("volUI", sliderValue);
     }
 
 }

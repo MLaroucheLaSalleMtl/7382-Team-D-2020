@@ -167,7 +167,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 2601472234466358501}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 5f28f604bf6715444ae555e793b33118, type: 2}
+  m_Material: {fileID: 6200000, guid: 9a80e9bfb0f517844894850d06980b8d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -232,10 +232,6 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/w]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: fef42707-3a9d-4d37-9d57-ec7d60a3d438
-    m_ActionName: Player/Bomb[/Keyboard/q,/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: ab555758-17db-443b-868a-6b1836a0373f
     m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -292,7 +288,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2601472234466358501}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9a80e9bfb0f517844894850d06980b8d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

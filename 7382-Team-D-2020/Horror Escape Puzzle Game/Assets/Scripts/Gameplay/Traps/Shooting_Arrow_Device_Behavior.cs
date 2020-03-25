@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -66,7 +65,7 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
 
     private void Burst()
     {
-        InvokeRepeating("Fire", 0f, 1f);
+        StartCoroutine("EnumBurst");
     }
 
     private void Fire()
@@ -81,7 +80,14 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player")) Fire();
-
     }
 
+    private IEnumerator EnumBurst() // Coroutine
+    {
+        for(int i = 0; i < 3; i++) // Burst of 3 shots
+        {
+            Fire();
+            yield return new WaitForSeconds(burstDelay);
+        }
+    }
 }
