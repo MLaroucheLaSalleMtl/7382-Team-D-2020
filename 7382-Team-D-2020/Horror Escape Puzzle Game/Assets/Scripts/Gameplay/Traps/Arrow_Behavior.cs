@@ -1,16 +1,13 @@
 ﻿
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public class Arrow_Behavior : MonoBehaviour
 {
-    [HideInInspector][SerializeField] private float speed;
-
-    [HideInInspector] [SerializeField] private bool homing = false;
+    [HideInInspector, SerializeField]private float speed;
+    [HideInInspector, SerializeField]private bool homing = false;
 
     private Transform trackedObjPos;
     private Rigidbody2D rigid;
-    private Collider2D coll;
 
     public float Speed { set => speed = value; }
     public bool Homing { get => homing;  set => homing = value; }
@@ -18,7 +15,6 @@ public class Arrow_Behavior : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        coll = GetComponent<Collider2D>();
     }
 
     private void Start()
@@ -48,26 +44,19 @@ public class Arrow_Behavior : MonoBehaviour
         
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!collision.collider.CompareTag("Trap"))
         {
-            Debug.Log("HIT!");
-            collision.gameObject.transform.parent = this.gameObject.transform;
-            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            collision.gameObject.GetComponent<Rigidbody2D>().mass = 0f;
-            collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = this.gameObject.GetComponent<Rigidbody2D>().velocity;
-            collision.GetComponent<Player_Behavior>().Death();
-        }
-        else
-        {
+            Invoke("DeleteGameobject", 3f);
             Destroy(rigid);
-            Destroy(this);
-            Destroy(coll);
+            Destroy(GetComponent<Collider2D>());
+            Destroy(GetComponent<TrailRenderer>());
         }
     }
 
-    
+    private void DeleteGameobject()
+    {
+        Destroy(this.gameObject);
+    }
 }

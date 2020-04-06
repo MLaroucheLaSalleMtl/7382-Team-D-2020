@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -15,7 +14,6 @@ public class Spike_Behavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-      
         anim.SetTrigger("Enter");
         
     }
@@ -25,15 +23,4 @@ public class Spike_Behavior : MonoBehaviour
         anim.SetTrigger("Exit");
         
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.GetComponent<Player_Behavior>().Death();
-        }
-      
-    }
-
-
 }

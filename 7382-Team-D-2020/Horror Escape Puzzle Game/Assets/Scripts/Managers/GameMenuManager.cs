@@ -1,31 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.InputSystem;
 
 public class GameMenuManager : MonoBehaviour
 {
-    private static GameMenuManager instance = null;
 
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject deathScreen;
-    private GameManager gm;
-    
+     private GameManager gm;
+
+    public static GameMenuManager instance = null;
 
     private void Awake()
     {
-        if (!(instance is null) && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        instance = this;
-    } // Singleton
+        CreateSingleton();
+    } 
 
     void Start()
     {
+        gm = GetComponent<GameManager>();
+
         pauseMenu.SetActive(false);
-        gm = GameManager.GetInstance;
     }
 
     private void OnEscapeToggle(InputAction.CallbackContext context)
@@ -44,14 +39,21 @@ public class GameMenuManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        gm.RespawnPlayer();
-        deathScreen.SetActive(true);
+        deathScreen?.SetActive(true);   
     }
-
+    private void CreateSingleton()
+    {
+        if (instance is null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     private void OnDestroy()
     {
         instance = null;
     }
-
-    public static GameMenuManager GetInstance => instance;
 }

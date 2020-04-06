@@ -23,9 +23,11 @@ Jump -> South Button
 
 CandyDesuFox. (2014, February 8). Firealpaca Brush Pack. Retrieved from https://www.deviantart.com/candydesufox/art/Firealpaca-Brush-Pack-432819226?d=343&modal=welcomeback
 
-Galdino Otten. (n.d.). Trace Of Rough. Retrieved from https://www.1001freefonts.com/trace-of-rough.font
+Matt McInerney. (n.d.). Orbitron Font. Retrieved from https://www.1001freefonts.com/orbitron.font
 
-{Not in this patch yet} Unicorn Heads. (n.d.). Generations Away. Retrieved from https://www.youtube.com/audiolibrary/music?nv=1 
+Hanu Dixit. (n.d.). Punk in Donuts. Retrieved from https://www.youtube.com/audiolibrary/music?nv=1
+
+Unicorn Heads. (n.d.). Generations Away. Retrieved from https://www.youtube.com/audiolibrary/music?nv=1 
 
 The Green Orbs. (n.d.). Springtime Family Band. Retrieved from https://www.youtube.com/audiolibrary/music?nv=1 
 

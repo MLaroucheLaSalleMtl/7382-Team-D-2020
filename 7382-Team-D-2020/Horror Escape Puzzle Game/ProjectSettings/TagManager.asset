@@ -12,6 +12,10 @@ TagManager:
   - Saw
   - EventSystem
   - TestDummy
+  - GameManager
+  - SceneManager
+  - TransFadeOut
+  - DeathZone
   layers:
   - Default
   - TransparentFX
