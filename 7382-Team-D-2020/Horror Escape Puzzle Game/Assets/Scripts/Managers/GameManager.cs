@@ -4,28 +4,27 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance = null;
+
+    public static GameManager instance = null;
     private bool isGamePaused = false;
-    UnityEvent OnPlayerRespawn = new UnityEvent();
+    internal UnityEvent OnPlayerRespawn = new UnityEvent();
+
+    [HideInInspector]public Spawner currentSpawnPoint;
+
 
 
     private void Awake()
-    {
-        if (!(instance is null) && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        instance = this;
-    } //Singleton
+    { 
+        CreateSingleton();
+        
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     private void Start()
     {
+        ResumeGame();
 
-    }
-
-    private void OnDestroy()
-    {
-        instance = null; 
+      
     }
 
 
@@ -39,18 +38,31 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        if (SaveLoadCheckpoint.GetLastCheckpoint != null)
+
+        GameMenuManager.instance.OnPlayerDeath();
+        currentSpawnPoint?.SpawnPlayer();
+        
+    }
+    private void CreateSingleton()
+    {
+        if (instance is null)
         {
-            SaveLoadCheckpoint.GetLastCheckpoint.gameObject.GetComponent<SaveLoadCheckpoint>().Respawn();
-            OnPlayerRespawn.Invoke();
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
         }
     }
-
     /// <summary>
     /// Pauses the game.
     /// </summary>
     public void PauseGame() => Time.timeScale = 0f;
     public void ResumeGame() => Time.timeScale = 1f;
-    public static GameManager GetInstance => instance;
+
+    private void OnDestroy()
+    {
+        instance = null;
+    }
 }
 

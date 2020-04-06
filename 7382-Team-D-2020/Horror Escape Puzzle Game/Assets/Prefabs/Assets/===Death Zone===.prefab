@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 993861536523621103}
   - component: {fileID: 993861536523621101}
-  - component: {fileID: 993861536523621100}
   m_Layer: 0
   m_Name: ===Death Zone===
-  m_TagString: Untagged
+  m_TagString: DeathZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,15 +49,3 @@ EdgeCollider2D:
   m_Points:
   - {x: 0, y: 0}
   - {x: 150, y: 0}
---- !u!114 &993861536523621100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993861536523621102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32ddd33759841fb47a9f396a214f17d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

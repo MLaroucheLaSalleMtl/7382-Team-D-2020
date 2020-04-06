@@ -16,7 +16,7 @@ public class PlayerInputs1 : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new MyInputs();
-
+        
     }
     private void OnEnable()
     {

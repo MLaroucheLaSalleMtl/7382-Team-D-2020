@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71555a4ed6f4e4c419554a000f830dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObj: {fileID: 2601472234466358501, guid: af20a8b6e2a99754aaa51d1b7c6ae053,
+  playerObj: {fileID: 2601472234466358501, guid: 7bdda0ae41c3992499e342aefccca951,
     type: 3}
+  init: 0
 --- !u!68 &4229278483389954129
 EdgeCollider2D:
   m_ObjectHideFlags: 0

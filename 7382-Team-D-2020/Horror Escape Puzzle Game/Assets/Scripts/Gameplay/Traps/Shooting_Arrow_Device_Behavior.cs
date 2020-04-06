@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-
-
 [RequireComponent(typeof(BoxCollider2D))]
 public class Shooting_Arrow_Device_Behavior : MonoBehaviour
 {
@@ -71,8 +69,9 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
     private void Fire()
     {
         projectile.GetComponent<Arrow_Behavior>().Speed = (firingMode != FiringMode.Trigger)? this.arrowSpeed: this.arrowSpeed * 2f;
-        projectile.GetComponent<Rigidbody2D>().velocity = Vector2.up * 10f;
+
         if(firingMode == FiringMode.Homing) projectile.GetComponent<Arrow_Behavior>().Homing = true;
+
         Instantiate(projectile, this.gameObject.transform.position, this.gameObject.transform.rotation);
         
     }
