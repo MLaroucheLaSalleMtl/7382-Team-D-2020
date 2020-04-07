@@ -7,10 +7,16 @@ public class Saw_Behavior : MonoBehaviour
 {
 
     #region UnityEditor
-    [SerializeField] private enum Behavior { Default, Translate, Orbit }
-    [SerializeField] private Behavior behavior;
+    private enum Behavior { Default, Translate, Orbit }
+    [SerializeField] private Behavior behavior = Behavior.Default;
+    private enum Rotation { Clockwise, Counter_Clockwise }
+    [SerializeField] private Rotation rotate = Rotation.Clockwise;
+
     [SerializeField] private Transform[] waypoints;
-    [Range(0f,360f)][SerializeField] private float speed;
+
+    
+    [Range(0f,360f), SerializeField] private float speed = 0f;
+
     [Tooltip("Do you want the Saw to follow the path forever?")]
     [HideInInspector] private int targetWaypoint = 0;
     [HideInInspector] private LineRenderer path;
@@ -98,14 +104,24 @@ public class Saw_Behavior : MonoBehaviour
                 {
                     targetWaypoint = 0;
                 }
-                Debug.DrawRay(currentPos, waypoints[targetWaypoint].position - anchor.position);
+                //Debug.DrawRay(currentPos, waypoints[targetWaypoint].position - anchor.position);
 
                 break;
 
 
             case Behavior.Orbit:
+
+                switch (rotate)
+                {
+                    case Rotation.Clockwise:
+                        anchor.Rotate(0, 0, -speed * Time.deltaTime);
+                        break;
+                    case Rotation.Counter_Clockwise:
+                        anchor.Rotate(0, 0, speed * Time.deltaTime);
+                        break;
+                }
+               
                 
-                anchor.Rotate(0, 0, speed * Time.deltaTime);
                 DrawPath(); // needs to be updated
                 break;
 
