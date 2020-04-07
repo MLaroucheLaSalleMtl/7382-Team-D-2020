@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 
@@ -9,12 +8,15 @@ public class Shaky_Platform : MonoBehaviour
     private BoxCollider2D coll;
     private Rigidbody2D rigid;
 
+    private Vector2 initPosition;
+
     [Tooltip("The time take takes before the platform drops.")]
     [SerializeField] private float delayTime;
 
     [Range(1f,10f)]
     [SerializeField] private float gravity;
 
+    [SerializeField] private float respawnTimer = 5f;
 
     private void Awake()
     {
@@ -24,6 +26,10 @@ public class Shaky_Platform : MonoBehaviour
     }
     private void Start()
     {
+        coll.enabled = true;
+
+        initPosition = transform.position;
+
         rigid.bodyType = RigidbodyType2D.Static; 
     }
 
@@ -32,18 +38,39 @@ public class Shaky_Platform : MonoBehaviour
         Invoke("Drop", delayTime);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Invoke("Drop", delayTime);
+        }
+
+    }
+
     private void Drop()
     {
+        float angularForce;
+
+        if (Random.Range(0,2) == 0)
+        {
+            angularForce = Random.Range(-10f, -5f);
+        }
+        else
+        {
+            angularForce = Random.Range(5f, 10f);
+        }
+
         rigid.bodyType = RigidbodyType2D.Dynamic;
         rigid.gravityScale = gravity;
-        rigid.angularVelocity = Random.Range(-180f, 180f);
+        rigid.angularVelocity = angularForce;
         coll.enabled = false;
 
-        Invoke("Delete", 3f);
+        Invoke("Delete", respawnTimer);
     }
 
     private void Delete()
     {
+        Instantiate(gameObject, initPosition, Quaternion.identity);
         Destroy(this.gameObject);
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Particles_Behavior : MonoBehaviour
 {
 
-    [SerializeField] private float speedDirection;
+    [SerializeField] private float speedDirection = 0f;
 
     void Update()
     {

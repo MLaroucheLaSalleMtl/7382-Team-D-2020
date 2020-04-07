@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1515089778587628852}
   - component: {fileID: 1515089778587628851}
   - component: {fileID: 3349778967121718799}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,6 +151,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Particle System_Vortex
       objectReference: {fileID: 0}
+    - target: {fileID: 9103929110599350982, guid: ac48ed41dd08cf54fbe28ccfc39c0abb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9103929110599350983, guid: ac48ed41dd08cf54fbe28ccfc39c0abb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -206,10 +211,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -272.339
       objectReference: {fileID: 0}
+    - target: {fileID: 9103929110623910137, guid: ac48ed41dd08cf54fbe28ccfc39c0abb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9103929110623910143, guid: ac48ed41dd08cf54fbe28ccfc39c0abb,
         type: 3}
       propertyPath: m_SortingOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9103929111319239015, guid: ac48ed41dd08cf54fbe28ccfc39c0abb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9103929111319239034, guid: ac48ed41dd08cf54fbe28ccfc39c0abb,
         type: 3}

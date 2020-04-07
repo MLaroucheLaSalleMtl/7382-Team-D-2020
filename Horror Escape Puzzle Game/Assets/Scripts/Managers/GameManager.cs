@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null;
     private bool isGamePaused = false;
-    internal UnityEvent OnPlayerRespawn = new UnityEvent();
 
     [HideInInspector]public Spawner currentSpawnPoint;
 
@@ -24,7 +23,6 @@ public class GameManager : MonoBehaviour
     {
         ResumeGame();
 
-      
     }
 
 

@@ -1,4 +1,4 @@
-﻿
+﻿using Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,7 +17,7 @@ public static class Player
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
 public class Player_Behavior: MonoBehaviour
 {
-    private UnityEvent OnDeath;
+    private UnityEvent OnDeath = new UnityEvent();
 
     private Rigidbody2D rigid;
 
@@ -25,15 +25,13 @@ public class Player_Behavior: MonoBehaviour
 
     private SpriteRenderer sprt;
 
-    [SerializeField] private float speed; //default of 4
-    [SerializeField] private float upwardsVelocity; //default of 5
+    [SerializeField] private float speed = 4; 
+    [SerializeField] private float upwardsVelocity = 5; 
 
     private bool canJump = true;
 
     private void Awake()
     {
-        OnDeath = new UnityEvent();
-
         rigid = GetComponent<Rigidbody2D>();
         sprt = GetComponent<SpriteRenderer>();
     }
@@ -41,6 +39,14 @@ public class Player_Behavior: MonoBehaviour
     private void Start()
     {
         if(GameManager.instance != null) OnDeath.AddListener(GameManager.instance.RespawnPlayer);
+
+        GetCinemachineVCam();
+    }
+
+    private void GetCinemachineVCam()
+    {
+        CinemachineVirtualCamera vcam = GameObject.FindGameObjectWithTag("VCam").GetComponent<CinemachineVirtualCamera>();
+        if(vcam != null) vcam.Follow = this.gameObject.transform;
     }
 
     private void FixedUpdate()
