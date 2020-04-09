@@ -50,13 +50,10 @@ public class Saw_Behavior : MonoBehaviour
                 DrawPath(); 
                 break;
 
-
             case Behavior.Orbit:
-
                 path.positionCount = 2;
                 break;
         }
-
     }
 
     private void DrawPath()
@@ -72,10 +69,8 @@ public class Saw_Behavior : MonoBehaviour
                 path.SetPosition(path.positionCount - 1, waypoints[0].position);
                 break;
 
-
             case Behavior.Orbit:
-
-                path.SetPosition(0, this.gameObject.transform.position);
+                path.SetPosition(0, transform.position);
                 path.SetPosition(1, anchor.position);
                 break;
         }
@@ -104,10 +99,7 @@ public class Saw_Behavior : MonoBehaviour
                 {
                     targetWaypoint = 0;
                 }
-                //Debug.DrawRay(currentPos, waypoints[targetWaypoint].position - anchor.position);
-
                 break;
-
 
             case Behavior.Orbit:
 
@@ -120,8 +112,6 @@ public class Saw_Behavior : MonoBehaviour
                         anchor.Rotate(0, 0, speed * Time.deltaTime);
                         break;
                 }
-               
-                
                 DrawPath(); // needs to be updated
                 break;
 

@@ -26,7 +26,9 @@ public class Player_Behavior: MonoBehaviour
     private SpriteRenderer sprt;
 
     [SerializeField] private float speed = 4; 
-    [SerializeField] private float upwardsVelocity = 5; 
+    [SerializeField] private float upwardsVelocity = 5;
+
+    public bool HasVCam = false;
 
     private bool canJump = true;
 
@@ -39,11 +41,10 @@ public class Player_Behavior: MonoBehaviour
     private void Start()
     {
         if(GameManager.instance != null) OnDeath.AddListener(GameManager.instance.RespawnPlayer);
-
-        GetCinemachineVCam();
+        if(HasVCam)GetCinemachineVCam();
     }
 
-    private void GetCinemachineVCam()
+    public void GetCinemachineVCam()
     {
         CinemachineVirtualCamera vcam = GameObject.FindGameObjectWithTag("VCam").GetComponent<CinemachineVirtualCamera>();
         if(vcam != null) vcam.Follow = this.gameObject.transform;
@@ -81,8 +82,12 @@ public class Player_Behavior: MonoBehaviour
         {
             rigid.AddForce(transform.up * upwardsVelocity, ForceMode2D.Impulse);
             canJump = false;
-            sprt.enabled = false;
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.collider.CompareTag("Ground")) sprt.enabled = false;
     }
 
     public void Death()
