@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -20,7 +21,9 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
     [Range(1f,20f)]
     [SerializeField] private float arrowSpeed;
 
-    [HideInInspector] private Transform playerPosition;
+
+    //Tracking
+    [SerializeField] private bool trackPlayer = false;
 
     public FiringMode PropFiringMode { get => firingMode; set => firingMode = value; }
     #endregion
@@ -34,6 +37,18 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
         ModeSelection();
     }
 
+    private void Update()
+    {
+        //if (trackPlayer) Track();
+    }
+
+    private void Track()
+    {
+        Transform playerPosition = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Transform>();
+
+        if (playerPosition != null) gameObject.transform.LookAt(playerPosition,Vector3.forward);
+    }
+
     private void ModeSelection()
     {
         switch (firingMode)
@@ -42,7 +57,7 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
                 InvokeRepeating("Fire", delay, repeatRate);
                 break;
 
-            case FiringMode.Trigger: 
+            case FiringMode.Trigger:
             case FiringMode.TriggerHoming:
                 this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 break;
@@ -52,8 +67,8 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
                 InvokeRepeating("Burst", delay, repeatRate);
                 break;
 
-            case FiringMode.Rand: 
-                InvokeRepeating("Fire", Random.Range(0f, 5f), Random.Range(0f, 5f));
+            case FiringMode.Rand:
+                StartCoroutine(RandomShots());
                 break;
 
             case FiringMode.Homing: 
@@ -81,12 +96,22 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
         if(collision.CompareTag("Player")) Fire();
     }
 
+    private IEnumerator RandomShots()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(0f, 10f));
+            Fire();
+        }
+    }
+
+
     private IEnumerator EnumBurst() // Coroutine
     {
         for(int i = 0; i < 3; i++) // Burst of 3 shots
         {
-            Fire();
             yield return new WaitForSeconds(burstDelay);
+            Fire();
         }
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2706034863418381093}
   - component: {fileID: 2706034863418381092}
   - component: {fileID: 2706034863418381112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Block
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -124,6 +124,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startVisible: 0
   triggerCounter: 0
+  trapActivationDelay: 0
+  colliderType: 0
+  OnTrapActivation:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &2706034863418381112
 Rigidbody2D:
   serializedVersion: 4

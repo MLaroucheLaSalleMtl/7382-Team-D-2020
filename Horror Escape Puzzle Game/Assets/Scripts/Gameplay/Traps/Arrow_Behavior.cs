@@ -4,13 +4,13 @@ using UnityEngine;
 public class Arrow_Behavior : MonoBehaviour
 {
     [HideInInspector, SerializeField]private float speed;
-    [HideInInspector, SerializeField]private bool homing = false;
+    [HideInInspector, SerializeField]public bool Homing = false;
 
     private Transform trackedObjPos;
     private Rigidbody2D rigid;
 
     public float Speed { set => speed = value; }
-    public bool Homing { get => homing;  set => homing = value; }
+  
 
     private void Awake()
     {
@@ -19,14 +19,14 @@ public class Arrow_Behavior : MonoBehaviour
 
     private void Start()
     {
-        if (homing) trackedObjPos = GameObject.FindGameObjectWithTag("Player").transform;
+        if (Homing) trackedObjPos = GameObject.FindGameObjectWithTag("Player").transform;
         
         transform.parent = null;
     }
 
     private void FixedUpdate()
     {
-        if (homing) HomingToTarget();
+        if (Homing) HomingToTarget();
         else if (rigid != null)
         {
             rigid.velocity = this.gameObject.transform.up * this.speed * 100 * Time.deltaTime;

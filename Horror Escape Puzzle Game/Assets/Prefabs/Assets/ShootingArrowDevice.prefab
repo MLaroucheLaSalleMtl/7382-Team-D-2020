@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4889511437982289961}
   - component: {fileID: 4889511437982289958}
   - component: {fileID: 4889511437982289959}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootingArrowDevice
   m_TagString: Trap
   m_Icon: {fileID: 0}

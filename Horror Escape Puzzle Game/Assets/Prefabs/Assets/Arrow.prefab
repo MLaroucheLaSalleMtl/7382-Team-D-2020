@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4533067963636316934}
   - component: {fileID: -1490065549278372617}
   - component: {fileID: 8652306662925729371}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Arrow
   m_TagString: Arrow
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bb7205a3aa5314a8f15a23f0d2414b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
   homing: 0
 --- !u!50 &-1490065549278372617
 Rigidbody2D:
@@ -148,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6749076261916085279}
   - component: {fileID: 7434725506828056782}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
