@@ -14,7 +14,9 @@ public class Spawner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) GameManager.instance.currentSpawnPoint = this;
+        Debug.Log("Spawner: " + (GameManager.instance == null));
+        GameManager gm = GameManager.instance;
+        if (collision.CompareTag("Player")) gm.currentSpawnPoint = this;
     }
 
     public void SpawnPlayer() 

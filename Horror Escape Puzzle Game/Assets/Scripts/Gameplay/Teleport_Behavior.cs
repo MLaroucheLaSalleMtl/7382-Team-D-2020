@@ -14,7 +14,7 @@ public class Teleport_Behavior : MonoBehaviour
 
     private void Start()
     {
-        slm.LoadSceneAsync(nextSceneName, false);
+        slm?.LoadSceneAsync(nextSceneName, false);
     }
 
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class Teleport_Behavior : MonoBehaviour
     {
         if (collision.CompareTag("Player") && slm.IsLoaded)
         {
-            slm.ActivateScene();
+            slm?.ActivateScene();
         }
     }
 }

@@ -1,49 +1,52 @@
 ﻿
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class GameMenuManager : MonoBehaviour
+public class GameMenuManager : MonoBehaviour, IGameState
 {
 
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject deathScreen;
-     private GameManager gm;
 
     public static GameMenuManager instance = null;
+    private Timer timer = null;
 
     private void Awake()
     {
         CreateSingleton();
     } 
 
-    void Start()
+    private void Start()
     {
-        gm = GetComponent<GameManager>();
+        GameObject timerObj = GameObject.FindGameObjectWithTag("Timer");
+
+        if (timerObj != null) timer = timerObj.GetComponent<Timer>();
 
         pauseMenu.SetActive(false);
     }
 
-    private void OnEscapeToggle(InputAction.CallbackContext context)
+    private void StartTimer()
     {
-        if (context.performed && gm.IsGamePaused)
+        if (timer != null)
         {
-            gm.PauseGame();
-            pauseMenu.SetActive(true);
-        }
-        else
-        {
-            gm.ResumeGame();
-            pauseMenu.SetActive(false);
+            timer.Enable();
         }
     }
 
+    private void PauseTimer()
+    {
+        if (timer != null)
+        {
+            timer.Paused = true;
+        }
+    }
     public void OnPlayerDeath()
     {
+        PauseTimer();
         deathScreen?.SetActive(true);   
     }
     private void CreateSingleton()
     {
-        if (instance is null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -52,6 +55,17 @@ public class GameMenuManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void Pause()
+    {
+        PauseTimer();
+    }
+
+    public void Play()
+    {
+        StartTimer();
+    }
+
     private void OnDestroy()
     {
         instance = null;

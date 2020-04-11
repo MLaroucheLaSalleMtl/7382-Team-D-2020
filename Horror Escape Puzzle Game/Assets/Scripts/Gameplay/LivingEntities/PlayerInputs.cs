@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
-
+    private GameManager gm = null;
     private MyInputs playerInputActions;
     private bool locked = true;
 
@@ -16,7 +16,7 @@ public class PlayerInputs : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new MyInputs();
-        
+        gm = GameManager.instance;
     }
     private void OnEnable()
     {
@@ -38,6 +38,20 @@ public class PlayerInputs : MonoBehaviour
     public void OnJumpCall(InputAction.CallbackContext context)
     {
         if (!locked) OnJumpCtx?.Invoke();
+    }
+    public void OnEscapeToggle(InputAction.CallbackContext context)
+    {
+
+        if (context.performed && gm.IsGamePaused)
+        {
+            gm.Pause();
+            //pauseMenu.SetActive(true);
+        }
+        else
+        {
+            gm.Play();
+            //pauseMenu.SetActive(false);
+        }
     }
 
     private void OnDisable()

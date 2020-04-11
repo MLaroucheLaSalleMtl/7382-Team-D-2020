@@ -114,10 +114,7 @@ public class Saw_Behavior : MonoBehaviour
                 }
                 DrawPath(); // needs to be updated
                 break;
-
         }
     }
- 
-
 }
 

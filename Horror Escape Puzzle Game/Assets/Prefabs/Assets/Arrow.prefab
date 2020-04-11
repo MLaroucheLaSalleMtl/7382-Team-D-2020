@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  homing: 0
+  Homing: 0
 --- !u!50 &-1490065549278372617
 Rigidbody2D:
   serializedVersion: 4

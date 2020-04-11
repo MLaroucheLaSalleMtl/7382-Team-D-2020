@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -31,9 +32,12 @@ public class Block_Behavior : MonoBehaviour
 
     private void Start()
     {
-        if (colliderType.Equals(ColliderChoice.Trigger)) boxColl.isTrigger = true;
-        else boxColl.isTrigger = false;
+        if (boxColl != null) SetCollderTrigger();
+        if (sprite != null) SetSpriteEnable();
+    }
 
+    private void SetSpriteEnable()
+    {
         if (!startVisible)
         {
             sprite.enabled = false;
@@ -42,6 +46,12 @@ public class Block_Behavior : MonoBehaviour
         {
             sprite.enabled = true;
         }
+    }
+
+    private void SetCollderTrigger()
+    {
+        if (colliderType == ColliderChoice.Trigger) boxColl.isTrigger = true;
+        else boxColl.isTrigger = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -55,7 +65,6 @@ public class Block_Behavior : MonoBehaviour
         {
             counter++;
         }
-        
     }
 
     private void ActivateTrap()
@@ -73,7 +82,6 @@ public class Block_Behavior : MonoBehaviour
         }
     }
 
-    //Can make a trigger for this too;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (counter == triggerCounter)

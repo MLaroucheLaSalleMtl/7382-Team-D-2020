@@ -10,13 +10,13 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
     [SerializeField] private GameObject projectile;
 
     public enum FiringMode { None, Auto, Trigger, Burst, Rand, Homing, TriggerHoming}
-    [HideInInspector][SerializeField] private FiringMode firingMode;
+    [HideInInspector, SerializeField] private FiringMode firingMode;
     
     //Invoke Repeating
-    [HideInInspector][SerializeField] public float delay;
-    [HideInInspector][SerializeField] public float repeatRate;
+    [HideInInspector, SerializeField] public float delay;
+    [HideInInspector, SerializeField] public float repeatRate;
 
-    [HideInInspector][SerializeField] public float burstDelay;
+    [HideInInspector, SerializeField] public float burstDelay;
 
     [Range(1f,20f)]
     [SerializeField] private float arrowSpeed;
@@ -71,8 +71,10 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
                 StartCoroutine(RandomShots());
                 break;
 
-            case FiringMode.Homing: 
+            case FiringMode.Homing:
+                projectile.GetComponent<Arrow_Behavior>().Homing = true;
                 goto case FiringMode.Auto;
+          
         }
     }
 
@@ -83,12 +85,8 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
 
     private void Fire()
     {
-        projectile.GetComponent<Arrow_Behavior>().Speed = (firingMode != FiringMode.Trigger)? this.arrowSpeed: this.arrowSpeed * 2f;
-
-        if(firingMode == FiringMode.Homing) projectile.GetComponent<Arrow_Behavior>().Homing = true;
-
+        projectile.GetComponent<Arrow_Behavior>().Speed = (firingMode != FiringMode.Trigger) ? this.arrowSpeed : this.arrowSpeed * 2f;
         Instantiate(projectile, this.gameObject.transform.position, this.gameObject.transform.rotation);
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -104,7 +102,6 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
             Fire();
         }
     }
-
 
     private IEnumerator EnumBurst() // Coroutine
     {

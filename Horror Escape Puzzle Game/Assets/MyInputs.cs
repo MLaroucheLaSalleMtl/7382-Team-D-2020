@@ -155,6 +155,54 @@ public class @MyInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Middle Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""5475141a-cb9f-4f50-ae7c-37fdd7856f3c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Scroll Wheel"",
+                    ""type"": ""Button"",
+                    ""id"": ""3db76a4d-a66b-4430-b809-9af90f67e812"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Empty Tracked Position"",
+                    ""type"": ""Button"",
+                    ""id"": ""d2917022-7feb-4a27-9403-c60c44d792e9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Empty Tracked Orientation"",
+                    ""type"": ""Button"",
+                    ""id"": ""3efe0347-7f78-47cc-834c-05af1502db18"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Empty Tracked Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""a33bbf2f-3c07-4df3-bbe5-2f5ba01fb7c3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""0451138f-9b65-40d4-998f-00233dc1eadf"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -395,7 +443,7 @@ public class @MyInputs : IInputActionCollection, IDisposable
                     ""path"": ""<Pointer>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
                     ""action"": ""Point"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -413,23 +461,78 @@ public class @MyInputs : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8d66d5ba-88d7-48e6-b1cd-198bbfef7ace"",
-                    ""path"": ""<Pen>/tip"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""4c191405-5738-4d4b-a523-c6a301dbf754"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67a65ca2-8ee5-406d-96b7-49854de9f3bb"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Middle Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2560019c-6f5a-4c90-86b6-b0e142ffd019"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Scroll Wheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c702d7e-aef8-47d2-8a3e-029884569481"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Empty Tracked Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0830d66c-7242-4b11-8977-9d44c98b2965"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Empty Tracked Orientation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c8e3592-0ea1-4271-9116-ab8b81da07dd"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Empty Tracked Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1027fb64-239b-4161-8a44-91ee050f1479"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ESC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -478,6 +581,12 @@ public class @MyInputs : IInputActionCollection, IDisposable
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
+        m_UI_MiddleClick = m_UI.FindAction("Middle Click", throwIfNotFound: true);
+        m_UI_ScrollWheel = m_UI.FindAction("Scroll Wheel", throwIfNotFound: true);
+        m_UI_EmptyTrackedPosition = m_UI.FindAction("Empty Tracked Position", throwIfNotFound: true);
+        m_UI_EmptyTrackedOrientation = m_UI.FindAction("Empty Tracked Orientation", throwIfNotFound: true);
+        m_UI_EmptyTrackedSelect = m_UI.FindAction("Empty Tracked Select", throwIfNotFound: true);
+        m_UI_ESC = m_UI.FindAction("ESC", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -574,6 +683,12 @@ public class @MyInputs : IInputActionCollection, IDisposable
     private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_Click;
     private readonly InputAction m_UI_RightClick;
+    private readonly InputAction m_UI_MiddleClick;
+    private readonly InputAction m_UI_ScrollWheel;
+    private readonly InputAction m_UI_EmptyTrackedPosition;
+    private readonly InputAction m_UI_EmptyTrackedOrientation;
+    private readonly InputAction m_UI_EmptyTrackedSelect;
+    private readonly InputAction m_UI_ESC;
     public struct UIActions
     {
         private @MyInputs m_Wrapper;
@@ -584,6 +699,12 @@ public class @MyInputs : IInputActionCollection, IDisposable
         public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @Click => m_Wrapper.m_UI_Click;
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
+        public InputAction @MiddleClick => m_Wrapper.m_UI_MiddleClick;
+        public InputAction @ScrollWheel => m_Wrapper.m_UI_ScrollWheel;
+        public InputAction @EmptyTrackedPosition => m_Wrapper.m_UI_EmptyTrackedPosition;
+        public InputAction @EmptyTrackedOrientation => m_Wrapper.m_UI_EmptyTrackedOrientation;
+        public InputAction @EmptyTrackedSelect => m_Wrapper.m_UI_EmptyTrackedSelect;
+        public InputAction @ESC => m_Wrapper.m_UI_ESC;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -611,6 +732,24 @@ public class @MyInputs : IInputActionCollection, IDisposable
                 @RightClick.started -= m_Wrapper.m_UIActionsCallbackInterface.OnRightClick;
                 @RightClick.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnRightClick;
                 @RightClick.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnRightClick;
+                @MiddleClick.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMiddleClick;
+                @MiddleClick.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMiddleClick;
+                @MiddleClick.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMiddleClick;
+                @ScrollWheel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
+                @ScrollWheel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
+                @ScrollWheel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
+                @EmptyTrackedPosition.started -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedPosition;
+                @EmptyTrackedPosition.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedPosition;
+                @EmptyTrackedPosition.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedPosition;
+                @EmptyTrackedOrientation.started -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedOrientation;
+                @EmptyTrackedOrientation.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedOrientation;
+                @EmptyTrackedOrientation.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedOrientation;
+                @EmptyTrackedSelect.started -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedSelect;
+                @EmptyTrackedSelect.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedSelect;
+                @EmptyTrackedSelect.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedSelect;
+                @ESC.started -= m_Wrapper.m_UIActionsCallbackInterface.OnESC;
+                @ESC.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnESC;
+                @ESC.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnESC;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -633,6 +772,24 @@ public class @MyInputs : IInputActionCollection, IDisposable
                 @RightClick.started += instance.OnRightClick;
                 @RightClick.performed += instance.OnRightClick;
                 @RightClick.canceled += instance.OnRightClick;
+                @MiddleClick.started += instance.OnMiddleClick;
+                @MiddleClick.performed += instance.OnMiddleClick;
+                @MiddleClick.canceled += instance.OnMiddleClick;
+                @ScrollWheel.started += instance.OnScrollWheel;
+                @ScrollWheel.performed += instance.OnScrollWheel;
+                @ScrollWheel.canceled += instance.OnScrollWheel;
+                @EmptyTrackedPosition.started += instance.OnEmptyTrackedPosition;
+                @EmptyTrackedPosition.performed += instance.OnEmptyTrackedPosition;
+                @EmptyTrackedPosition.canceled += instance.OnEmptyTrackedPosition;
+                @EmptyTrackedOrientation.started += instance.OnEmptyTrackedOrientation;
+                @EmptyTrackedOrientation.performed += instance.OnEmptyTrackedOrientation;
+                @EmptyTrackedOrientation.canceled += instance.OnEmptyTrackedOrientation;
+                @EmptyTrackedSelect.started += instance.OnEmptyTrackedSelect;
+                @EmptyTrackedSelect.performed += instance.OnEmptyTrackedSelect;
+                @EmptyTrackedSelect.canceled += instance.OnEmptyTrackedSelect;
+                @ESC.started += instance.OnESC;
+                @ESC.performed += instance.OnESC;
+                @ESC.canceled += instance.OnESC;
             }
         }
     }
@@ -668,5 +825,11 @@ public class @MyInputs : IInputActionCollection, IDisposable
         void OnPoint(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
+        void OnMiddleClick(InputAction.CallbackContext context);
+        void OnScrollWheel(InputAction.CallbackContext context);
+        void OnEmptyTrackedPosition(InputAction.CallbackContext context);
+        void OnEmptyTrackedOrientation(InputAction.CallbackContext context);
+        void OnEmptyTrackedSelect(InputAction.CallbackContext context);
+        void OnESC(InputAction.CallbackContext context);
     }
 }

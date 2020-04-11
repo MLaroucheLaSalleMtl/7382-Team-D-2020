@@ -19,7 +19,7 @@ public class Arrow_Behavior : MonoBehaviour
 
     private void Start()
     {
-        if (Homing) trackedObjPos = GameObject.FindGameObjectWithTag("Player").transform;
+        if (Homing) trackedObjPos = GameObject.FindGameObjectWithTag("Player")?.transform;
         
         transform.parent = null;
     }
@@ -27,21 +27,26 @@ public class Arrow_Behavior : MonoBehaviour
     private void FixedUpdate()
     {
         if (Homing) HomingToTarget();
-        else if (rigid != null)
+        else
         {
-            rigid.velocity = this.gameObject.transform.up * this.speed * 100 * Time.deltaTime;
+            if (rigid != null) rigid.velocity = this.gameObject.transform.up * this.speed * 100 * Time.deltaTime;
         } 
     }
 
-
     private void HomingToTarget()
     {
-        Vector2 direction = trackedObjPos.position - this.transform.position;
-      
-        float rotation = Vector3.Cross(direction.normalized, transform.up).z;
-        rigid.angularVelocity = -rotation * 360f ;
-        rigid.velocity = direction.normalized * this.speed * 100f * Time.deltaTime;
-        
+        if(trackedObjPos != null)
+        {
+            Vector2 direction = trackedObjPos.position - this.transform.position;
+
+            float rotation = Vector3.Cross(direction.normalized, transform.up).z;
+            rigid.angularVelocity = -rotation * 360f;
+            rigid.velocity = direction.normalized * this.speed * 100f * Time.deltaTime;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -52,6 +57,7 @@ public class Arrow_Behavior : MonoBehaviour
             Destroy(rigid);
             Destroy(GetComponent<Collider2D>());
             Destroy(GetComponent<TrailRenderer>());
+            Homing = false;
         }
     }
 

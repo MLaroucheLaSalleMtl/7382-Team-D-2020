@@ -40,13 +40,14 @@ public class Player_Behavior: MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.instance != null) OnDeath.AddListener(GameManager.instance.RespawnPlayer);
-        if(HasVCam)GetCinemachineVCam();
+        if(GameManager.instance != null) OnDeath.AddListener(GameManager.instance.OnPlayerDeath);
+        if(HasVCam) GetCinemachineVCam();
     }
 
     public void GetCinemachineVCam()
     {
-        CinemachineVirtualCamera vcam = GameObject.FindGameObjectWithTag("VCam").GetComponent<CinemachineVirtualCamera>();
+        GameObject gobj = GameObject.FindGameObjectWithTag("VCam");
+        CinemachineVirtualCamera vcam = gobj?.GetComponent<CinemachineVirtualCamera>();
         if(vcam != null) vcam.Follow = this.gameObject.transform;
     }
 
@@ -94,7 +95,7 @@ public class Player_Behavior: MonoBehaviour
     {
         Player.Life--;
         OnDeath?.Invoke();
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     public void SetMovement(Vector2 direction) => movement = direction;

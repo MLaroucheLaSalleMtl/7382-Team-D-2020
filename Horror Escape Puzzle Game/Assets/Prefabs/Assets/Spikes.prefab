@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6235516778652882013}
   - component: {fileID: 6235516778652882009}
   - component: {fileID: 6235516778652882008}
-  - component: {fileID: 6235516778652882011}
   - component: {fileID: 6235516778652881990}
+  - component: {fileID: -5301316562251053989}
   m_Layer: 8
   m_Name: Spikes
   m_TagString: Trap
@@ -123,25 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e2e75b3c45218e41a31dabf73d54f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &6235516778652882011
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6235516778652882012}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 199cae46d889f444fa70b30c53e1f85f, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &6235516778652881990
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,3 +149,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.36353913}
   m_EdgeRadius: 0
+--- !u!95 &-5301316562251053989
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6235516778652882012}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 199cae46d889f444fa70b30c53e1f85f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
