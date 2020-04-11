@@ -5,22 +5,22 @@ using UnityEngine;
 public class Spike_Behavior : MonoBehaviour
 {
 
-    private Animator anim;
+    //private Animator anim;
 
-    private void Awake()
-    {
-        anim = this.gameObject.GetComponent<Animator>();
-    }
+    //private void Awake()
+    //{
+    //    anim = this.gameObject.GetComponent<Animator>();
+    //}
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        anim.SetTrigger("Enter");
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    anim.SetTrigger("Enter");
         
-    }
+    //}
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        anim.SetTrigger("Exit");
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    anim.SetTrigger("Exit");
         
-    }
+    //}
 }

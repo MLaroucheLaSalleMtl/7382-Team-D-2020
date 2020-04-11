@@ -10,8 +10,6 @@ using UnityEditor;
 [CanEditMultipleObjects]
 public class Custom_Shooting_Device_Editor : Editor
 {
-
-
     SerializedProperty repeatRate;
     SerializedProperty delay;
     SerializedProperty burstDelay;
@@ -25,6 +23,8 @@ public class Custom_Shooting_Device_Editor : Editor
         burstDelay = serializedObject.FindProperty("burstDelay");
         firingMode = serializedObject.FindProperty("firingMode");
     }
+
+    
 
     public override void OnInspectorGUI()
     {

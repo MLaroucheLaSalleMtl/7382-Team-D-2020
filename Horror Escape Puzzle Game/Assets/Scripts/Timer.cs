@@ -3,15 +3,14 @@ using System;
 using System.Collections;
 using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
+
 
 [RequireComponent(typeof(Text))]
-public class Timer : MonoBehaviour
+public class Timer :  MonoBehaviour
 {
     [SerializeField] private float time = 0f;
-
-    private Text timerField = null;
 
     /// <summary>
     /// Default settings false.
@@ -20,22 +19,18 @@ public class Timer : MonoBehaviour
     public bool Paused = false;
     public float RemainingTime = 0; // redundant - in order to reset the timer to its original time
 
+    private Text timerField = null;
+
     private StringBuilder builder = new StringBuilder();
 
     public UnityEvent OnTimerFinished = new UnityEvent();
-
-    private void Start()
-    {
-        RemainingTime = time;
-        Activate();
-    }
 
     private void Awake()
     {
         timerField = GetComponent<Text>();
     }
 
-    public void Activate()
+    public void Enable()
     {
         StartCoroutine(StartTimer());
     }
@@ -55,17 +50,15 @@ public class Timer : MonoBehaviour
             else
             {
                 yield return null;
-            }
-            
+            }  
         }
         OnTimerFinished?.Invoke();
-        yield return null;
     }
 
     public void ResetTime()
     {
         StopAllCoroutines();
-        Activate();
+        Enable();
     }
 
     private void DisplayTime()

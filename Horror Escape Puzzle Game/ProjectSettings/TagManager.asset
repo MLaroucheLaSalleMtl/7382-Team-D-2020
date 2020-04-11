@@ -17,6 +17,7 @@ TagManager:
   - TransFadeOut
   - DeathZone
   - VCam
+  - Timer
   layers:
   - Default
   - TransparentFX

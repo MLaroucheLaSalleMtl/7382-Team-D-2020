@@ -65,22 +65,23 @@ public class SceneLoaderManager: MonoBehaviour
     private IEnumerator WaitForLoadSceneDirectly(string name)
     {
         yield return new WaitForSeconds(waitForSeconds);
+        GameManager.instance?.SetSpawnAsNull();
         SceneManager.LoadScene(name);
-        GameManager.instance.currentSpawnPoint = null;
+        
     }
     private IEnumerator WaitForActivateScene()
     {
         yield return new WaitForSeconds(waitForSeconds);
         if (IsLoaded)
         {
+            GameManager.instance?.SetSpawnAsNull();
             async.allowSceneActivation = true;
-            GameManager.instance.currentSpawnPoint = null;
         }
     }
 
     private void CreateSingleton()
     {
-        if (instance is null)
+        if (instance == null)
         {
             instance = this;
         }

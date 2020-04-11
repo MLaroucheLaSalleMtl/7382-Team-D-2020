@@ -1,45 +1,48 @@
 ﻿
-using UnityEngine;
-using UnityEngine.Events;
 
-public class GameManager : MonoBehaviour
+using UnityEngine;
+
+public class GameManager : MonoBehaviour, IGameState
 {
 
     public static GameManager instance = null;
+
+    private GameMenuManager gmm = null;
+
     private bool isGamePaused = false;
 
     [HideInInspector]public Spawner currentSpawnPoint;
-
-
 
     private void Awake()
     { 
         CreateSingleton();
         
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
+
+        Debug.Log("GM: " + instance);
     }
 
     private void Start()
     {
-        ResumeGame();
-
+        gmm = GameMenuManager.instance;
+        Play();
     }
 
+    public void SetSpawnAsNull() => currentSpawnPoint = null;
 
+    
     /// <summary>
     /// Check if game is currently paused.
     /// </summary>
     /// <return>
     /// Returns true or false.
     /// </return>>
-    public bool IsGamePaused => isGamePaused;
+    public bool IsGamePaused { get => isGamePaused; set => isGamePaused = value; }
 
-    public void RespawnPlayer()
+    public void OnPlayerDeath()
     {
-
         GameMenuManager.instance.OnPlayerDeath();
-        currentSpawnPoint?.SpawnPlayer();
-        
+        currentSpawnPoint.SpawnPlayer();
     }
     private void CreateSingleton()
     {
@@ -49,15 +52,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
     /// <summary>
     /// Pauses the game.
     /// </summary>
-    public void PauseGame() => Time.timeScale = 0f;
-    public void ResumeGame() => Time.timeScale = 1f;
-
+    public void Pause()
+    {
+        gmm.Pause();
+        Time.timeScale = 0f;
+    }
+    public void Play()
+    {
+        gmm.Play();
+        Time.timeScale = 1f;
+    }
     private void OnDestroy()
     {
         instance = null;
