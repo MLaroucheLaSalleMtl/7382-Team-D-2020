@@ -313,7 +313,7 @@ PrefabInstance:
     - target: {fileID: 8966015220380824317, guid: 5a09cf4314a6f724998a132c384de553,
         type: 3}
       propertyPath: m_Name
-      value: Transition_Fade_Out
+      value: Transition_Fade_In
       objectReference: {fileID: 0}
     - target: {fileID: 8966015220380824317, guid: 5a09cf4314a6f724998a132c384de553,
         type: 3}
@@ -517,7 +517,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 2024558168790783635, guid: a3f907a4f94798e49a91d876f86ef0ed,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -925,6 +925,8 @@ PlayableDirector:
     value: {fileID: 2008127458}
   - key: {fileID: 4509933766003131785, guid: dbcb05b73a75af24681c5c105c745066, type: 2}
     value: {fileID: 651047323}
+  - key: {fileID: 583138277359770006, guid: dbcb05b73a75af24681c5c105c745066, type: 2}
+    value: {fileID: 1986018669}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &651047317
@@ -939,8 +941,8 @@ GameObject:
   - component: {fileID: 651047319}
   - component: {fileID: 651047321}
   - component: {fileID: 651047318}
-  - component: {fileID: 651047322}
   - component: {fileID: 651047323}
+  - component: {fileID: 651047322}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1035,11 +1037,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 651047317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4269b6e31184f449a23b65eab568704, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b68df290eb851a48bc18b202d5df502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MainMenuScene
-  activateScene: 0
 --- !u!114 &651047323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,14 +1059,14 @@ MonoBehaviour:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 651047322}
-          m_MethodName: ActivateScene
-          m_Mode: 1
+          m_MethodName: LoadSceneDirectly
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: MainMenuScene
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &660879200
@@ -1728,6 +1728,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638534018}
   m_CullTransparentMesh: 0
+--- !u!1 &1663097791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9060969123789679380, guid: 19e48b7e0488aaa4b9cea6d0c0f6510b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2125054386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1670068292
 GameObject:
   m_ObjectHideFlags: 0
@@ -6852,6 +6858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1986018667}
   - component: {fileID: 1986018668}
+  - component: {fileID: 1986018669}
   m_Layer: 5
   m_Name: ---Slides---
   m_TagString: Untagged
@@ -6902,6 +6909,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1986018669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986018666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 965da9234851d404e9eba6c425cee1aa, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1663097791}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &2008127456
 GameObject:
   m_ObjectHideFlags: 0
@@ -7101,7 +7137,7 @@ PrefabInstance:
     - target: {fileID: 9060969123789679380, guid: 19e48b7e0488aaa4b9cea6d0c0f6510b,
         type: 3}
       propertyPath: m_Name
-      value: Transition_Fade_In
+      value: Transition_Fade_Out
       objectReference: {fileID: 0}
     - target: {fileID: 9060969123789679380, guid: 19e48b7e0488aaa4b9cea6d0c0f6510b,
         type: 3}
