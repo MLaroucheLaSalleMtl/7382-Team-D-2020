@@ -10,7 +10,6 @@ public class SpeedBoost : MonoBehaviour
     private int animSpritesPointer = 0;
     [SerializeField] private float force = 5f;
 
-
     private void Start()
     {
         render = GetComponent<SpriteRenderer>();
