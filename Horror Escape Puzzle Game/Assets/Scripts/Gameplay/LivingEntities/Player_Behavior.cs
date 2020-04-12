@@ -1,16 +1,17 @@
 ﻿using Cinemachine;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 public static class Player
 {
 
-    private static int life = 5; //default 5 lifes per session, num can go negative
+    private static int deathCounter = 0; // track death count 
 
-    public static int Life
+    public static int DeathCounter
     {
-        get => life;
-        set => life = value > life ? life : value;
+        get => deathCounter;
+        set => deathCounter = value > deathCounter ? deathCounter : value;
     }
 }
 
@@ -26,11 +27,14 @@ public class Player_Behavior: MonoBehaviour
     private SpriteRenderer sprt;
 
     [SerializeField] private float speed = 4; 
-    [SerializeField] private float upwardsVelocity = 5;
+    [SerializeField] private float upwardsVelocity = 3.5f;
 
     public bool HasVCam = false;
 
-    private bool canJump = true;
+    private int surfaceContact = 0;
+
+    [SerializeField] private AudioClip[] deathSFX;
+    [SerializeField] private AudioClip[] respawnSFX;
 
     private void Awake()
     {
@@ -42,6 +46,14 @@ public class Player_Behavior: MonoBehaviour
     {
         if(GameManager.instance != null) OnDeath.AddListener(GameManager.instance.OnPlayerDeath);
         if(HasVCam) GetCinemachineVCam();
+
+        PlayRespawnSFX();
+    }
+
+    private void PlayRespawnSFX()
+    {
+        GetComponent<AudioSource>().clip = respawnSFX[UnityEngine.Random.Range(0, respawnSFX.Length)];
+        GetComponent<AudioSource>().Play();
     }
 
     public void GetCinemachineVCam()
@@ -64,38 +76,54 @@ public class Player_Behavior: MonoBehaviour
         }
         else
         {
-            canJump = true;
+            surfaceContact++;
             sprt.enabled = true;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("DeathZone"))
-        {
-            Death();
-        }
-    }
-
-    public void Jump()
-    {
-        if (canJump)
-        {
-            rigid.AddForce(transform.up * upwardsVelocity, ForceMode2D.Impulse);
-            canJump = false;
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.collider.CompareTag("Ground")) sprt.enabled = false;
+        if (collision.collider.CompareTag("Ground") )
+        {
+            surfaceContact--;
+            if(surfaceContact < 1)
+            {
+                sprt.enabled = false;
+            }
+        }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+       if (collision.CompareTag("DeathZone"))
+       {
+           Death();
+       }
+    }
+
+    public void Jump()
+    {
+        if (CanJump)
+        {
+            rigid.AddForce(transform.up * upwardsVelocity, ForceMode2D.Impulse);
+        }
+    }
+
+    private bool CanJump => surfaceContact > 0;
 
     public void Death()
     {
-        Player.Life--;
+        StartCoroutine(WaitForSeconds());
+        Player.DeathCounter++;
         OnDeath?.Invoke();
         Destroy(gameObject);
+    }
+
+    private IEnumerator WaitForSeconds()
+    {
+        GetComponent<AudioSource>().clip = deathSFX[UnityEngine.Random.Range(0, deathSFX.Length)];
+        GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(0.5f);
     }
 
     public void SetMovement(Vector2 direction) => movement = direction;

@@ -23,6 +23,7 @@ public class SpeedBoost : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.GetComponent<Rigidbody2D>().AddForce(transform.right * force, ForceMode2D.Impulse);
+            GetComponent<AudioSource>().Play();
         }
     }
 

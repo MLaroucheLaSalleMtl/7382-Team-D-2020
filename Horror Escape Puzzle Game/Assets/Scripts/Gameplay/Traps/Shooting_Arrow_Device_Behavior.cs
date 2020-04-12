@@ -39,14 +39,20 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
 
     private void Update()
     {
-        //if (trackPlayer) Track();
+        if (trackPlayer) Track();
     }
 
     private void Track()
     {
-        Transform playerPosition = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Transform>();
+        GameObject target = GameObject.FindGameObjectWithTag("Player");
 
-        if (playerPosition != null) gameObject.transform.LookAt(playerPosition,Vector3.forward);
+        if (target != null)
+        {
+            Transform trans = target.GetComponent<Transform>();
+
+            transform.up = trans.position - transform.position;
+
+        }
     }
 
     private void ModeSelection()

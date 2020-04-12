@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class Arrow_Behavior : MonoBehaviour
 {
-    [HideInInspector, SerializeField]private float speed;
+    [HideInInspector, SerializeField]private float speed = 0f;
     [HideInInspector, SerializeField]public bool Homing = false;
 
     private Transform trackedObjPos;
     private Rigidbody2D rigid;
+
+    [SerializeField] private float degreePerSecond = 180f;
 
     public float Speed { set => speed = value; }
   
@@ -40,8 +42,8 @@ public class Arrow_Behavior : MonoBehaviour
             Vector2 direction = trackedObjPos.position - this.transform.position;
 
             float rotation = Vector3.Cross(direction.normalized, transform.up).z;
-            rigid.angularVelocity = -rotation * 360f;
-            rigid.velocity = direction.normalized * this.speed * 100f * Time.deltaTime;
+            rigid.angularVelocity = -rotation * degreePerSecond;
+            rigid.velocity = transform.up * this.speed * 100f * Time.deltaTime;
         }
         else
         {
