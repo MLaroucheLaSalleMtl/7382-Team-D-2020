@@ -1,66 +1,114 @@
-﻿
-using System.IO;
-using UnityEditor;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] clipList;
+    public static MusicManager instance = null;
+
+    [SerializeField] private AudioClip[] levelMusicClips;
+    [SerializeField] private AudioClip mainMenuClip;
+    [SerializeField] private AudioClip preloaderClip;
 
     private AudioSource audioS = null;
 
-    private string[] sceneNames;
-
     private void Awake()
     {
+        CreateSingleton();
+
         audioS = GetComponent<AudioSource>();
 
-
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-        SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
-
-        GetAllSceneNames();
 
         DontDestroyOnLoad(gameObject);
     }
 
-    private void GetAllSceneNames()
+    private void Start()
     {
-        int count = SceneManager.sceneCountInBuildSettings;
-
-        sceneNames = new string[count];
-
-        for (int i = 0; i < count; i++)
-        {
-            sceneNames[i] = Path.GetFileNameWithoutExtension(EditorBuildSettings.scenes[i].path);
-        }
-    }
-
-    private void SceneManager_sceneUnloaded(Scene sc)
-    {
-        // kill the music
+        audioS.loop = true;
+        audioS.volume = 0;
+        StartCoroutine(IEnumFadeIn());
     }
 
     private void SceneManager_sceneLoaded(Scene sc, LoadSceneMode loadMode)
     {
-        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        audioS.volume = 0f;
+
+        AudioClip clip = null;
+
+        switch (sc.name)
         {
-            if (sc.name == sceneNames[i])
-            {
-                // play the corresponding music
-                Debug.Log("Found Scene");
+            case "PreloaderScene":
+                clip = preloaderClip;
                 break;
-            }
+
+            case "MainMenuScene":
+                clip = mainMenuClip;
+                break;
+
+            default: //Plays a Level Music
+
+                string sub = sc.name.Substring(sc.name.Length-1);
+
+                for (int i = 0; i < levelMusicClips.Length; i++)
+                {
+                    if(sub == i.ToString())
+                    {
+                        clip = levelMusicClips[i];
+                    }
+                }
+                break;
+        }
+        audioS.clip = clip;
+        audioS.Play();
+
+        StartCoroutine(IEnumFadeIn());
+    }
+
+    private IEnumerator IEnumFadeIn()
+    {
+        float temp = 0f;
+        while(audioS.volume <= 0.8)
+        {
+            audioS.volume = Mathf.Lerp(0f, 0.8f, temp);
+            Debug.Log(audioS.volume);
+            yield return null;
+            temp += Time.deltaTime;
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private IEnumerator IEnumFadeOut()
     {
-        
+        float temp = 0f;
+        while (audioS.volume != 0)
+        {
+            audioS.volume = Mathf.Lerp(0.8f, 0f, temp);
+            Debug.Log(audioS.volume);
+            yield return null;
+            temp += Time.deltaTime;
+        }
     }
 
-
+    public void FadeOut()
+    {
+        StartCoroutine(IEnumFadeOut());
+    }
+    public void Pause() => audioS.Pause();
+    public void UnPause() => audioS.UnPause();
+    private void CreateSingleton()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    private void OnDestroy()
+    {
+        instance = null;
+    }
 }

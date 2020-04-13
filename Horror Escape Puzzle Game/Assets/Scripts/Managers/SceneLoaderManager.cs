@@ -7,12 +7,13 @@ public class SceneLoaderManager: MonoBehaviour
 {
 
     [Tooltip("Enter the Scene Name you want to load")]
-    [SerializeField] private string sceneName;
-    [SerializeField] private bool activateScene;
-    private AsyncOperation async;
+    [SerializeField] private string sceneName = "";
+    [SerializeField] private bool activateScene = false;
+    private AsyncOperation async = null;
     private float waitForSeconds = 1.2f;
 
-    public static SceneLoaderManager instance = null; 
+    public static SceneLoaderManager instance = null;
+    private MusicManager mm = null;
 
     private void Awake()
     {
@@ -23,6 +24,8 @@ public class SceneLoaderManager: MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        mm = MusicManager.instance;
+
         async = SceneManager.LoadSceneAsync(sceneName);
         async.allowSceneActivation = activateScene;
     }
@@ -64,6 +67,7 @@ public class SceneLoaderManager: MonoBehaviour
 
     private IEnumerator WaitForLoadSceneDirectly(string name)
     {
+        mm.FadeOut();
         yield return new WaitForSeconds(waitForSeconds);
         GameManager.instance?.SetSpawnAsNull();
         SceneManager.LoadScene(name);
@@ -71,6 +75,7 @@ public class SceneLoaderManager: MonoBehaviour
     }
     private IEnumerator WaitForActivateScene()
     {
+        mm.FadeOut();
         yield return new WaitForSeconds(waitForSeconds);
         if (IsLoaded)
         {
