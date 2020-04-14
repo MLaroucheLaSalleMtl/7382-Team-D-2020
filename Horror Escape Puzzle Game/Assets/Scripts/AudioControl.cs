@@ -18,31 +18,38 @@ public class AudioControl : MonoBehaviour
         audioM.GetFloat("volUI", out float fUI);
         audioM.GetFloat("volSFX", out float fSFX);
 
-        sVolMaster.value = fM;
-        sVolUI.value = fUI;
-        sVolSFX.value = fSFX;
-        sVolMusic.value = fMusic;
+        sVolMaster.value = ConvertDecibelToPercentage(ref fM);
+        sVolUI.value = ConvertDecibelToPercentage(ref fUI);
+        sVolSFX.value = ConvertDecibelToPercentage(ref fSFX);
+        sVolMusic.value = ConvertDecibelToPercentage(ref fMusic);
 
+    }
+
+    private float ConvertDecibelToPercentage(ref float value) => ((value + 40f) / 40f) * 100;
+    private float ConvertPercentageToDecibel(ref float value) 
+    {
+        float temp = (1 - (value * 0.01f)) * -40f;
+        return temp <= -40f ? -80f : temp;
     }
 
     public void ControlMaster(float sliderValue)
     {
-        audioM.SetFloat("volMaster", sliderValue);
+        audioM.SetFloat("volMaster", ConvertPercentageToDecibel(ref sliderValue));
     }
 
     public void ControlSFX(float sliderValue)
     {
-        audioM.SetFloat("volSFX", sliderValue);
+        audioM.SetFloat("volSFX", ConvertPercentageToDecibel(ref sliderValue));
     }
 
     public void ControlMusic(float sliderValue)
     {
-        audioM.SetFloat("volMusic",sliderValue);
+        audioM.SetFloat("volMusic", ConvertPercentageToDecibel(ref sliderValue));
     }
 
     public void ControlUI(float sliderValue)
     {
-        audioM.SetFloat("volUI", sliderValue);
+        audioM.SetFloat("volUI", ConvertPercentageToDecibel(ref sliderValue));
     }
 
 }

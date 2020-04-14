@@ -1,44 +1,38 @@
 ﻿
 using UnityEngine;
 
-
-
 public static class PlayerData 
 {
-
-    //Here is a file that contains all the necessary data to the game.
-    //i.e. saves, achievements, collections, etc...
-
-    //Level Tracker
-    private static int numLevelUnlocked;
+    //Here is a file that contains all the necessary data to the player.
 
     //Statistics
-    private static int deathBySpikes;
-    private static int deathBySaw;
-    private static int deathByLaser;
-    private static int deathByFall;
-    private static int deathBySuicide;
-
-    public static int NumLevelUnlocked  => numLevelUnlocked;
+    //REMARKS: NEED TO UPDATE THEIR TEXT.NAME TOO OTHERWISE WILL BREAK
+    private static int deathBySpikes = 0;
+    private static int deathBySaw = 0;
+    private static int deathByArrow = 0 ;
+    private static int deathByFall = 0;
     
-    public static int TotalDeaths => deathByFall + deathByLaser + deathBySaw + deathBySpikes + deathBySuicide;
-
+    public static int TotalDeaths => deathByFall + deathByArrow + deathBySaw + deathBySpikes;
 
     //TODO: Add test conditions for setters;
-    public static int DeathBySpikes { get => deathBySpikes; set => deathBySpikes = value; }
-    public static int DeathBySaw { get => deathBySaw; set => deathBySaw = value; }
-    public static int DeathByLaser { get => deathByLaser; set => deathByLaser = value; }
-    public static int DeathByFall { get => deathByFall; set => deathByFall = value; }
-    public static int DeathBySuicide { get => deathBySuicide; set => deathBySuicide = value; }
+    public static int DeathBySpikes { get => deathBySpikes; set => deathBySpikes = value < 0? 0: value; }
+    public static int DeathBySaw { get => deathBySaw; set => deathBySaw = value < 0 ? 0 : value; }
+    public static int DeathByArrow { get => deathByArrow; set => deathByArrow = value < 0 ? 0 : value; }
+    public static int DeathByFall { get => deathByFall; set => deathByFall = value < 0 ? 0 : value; }
 
-    private static void LoadInitialData()
-    {
-        numLevelUnlocked = PlayerPrefs.GetInt("NumLevelsUnlocked");
-
-        deathBySaw = PlayerPrefs.GetInt("SawKills");
-        deathBySpikes = PlayerPrefs.GetInt("SpikeSkills");
-        deathByLaser = PlayerPrefs.GetInt("LaserSkill");
-        deathByFall = PlayerPrefs.GetInt("FallKills");
-        deathBySuicide = PlayerPrefs.GetInt("Suicide");
+    public static void LoadInitialData()
+    { 
+        deathBySaw = PlayerPrefs.GetInt(nameof(deathBySaw));
+        deathBySpikes = PlayerPrefs.GetInt(nameof(deathBySpikes));
+        deathByArrow = PlayerPrefs.GetInt(nameof(deathByArrow));
+        deathByFall = PlayerPrefs.GetInt(nameof(deathByFall));
     }
+
+    public static void SaveData()
+    {
+        PlayerPrefs.SetInt(nameof(deathBySaw), deathBySaw);
+        PlayerPrefs.SetInt(nameof(deathBySpikes), deathBySpikes);
+        PlayerPrefs.SetInt(nameof(deathByArrow), deathByArrow);
+        PlayerPrefs.SetInt(nameof(deathByFall), deathByFall);
+    } 
 }

@@ -33,6 +33,14 @@ public class @MyInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""6fdcb3ff-2f6b-49e0-968e-7f69d9013568"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -59,7 +67,40 @@ public class @MyInputs : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""Movements Arrow"",
+                    ""id"": ""a82a2936-5f49-4025-9980-279efd9408c5"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a339007b-adae-478b-994c-be277e5effd1"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e9b81a22-f1bb-49dd-909f-f06df82b5500"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Movements AD"",
                     ""id"": ""f1b1cdcb-858d-4c4a-a968-de9e6c00a6b8"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -94,11 +135,33 @@ public class @MyInputs : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""79c1988d-f3c6-4975-95f4-fca85994df0c"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eeed3b93-4b8d-4cae-85ae-72601c0bead9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1857934d-fda3-4eab-bbc7-a2ca95e93097"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -192,14 +255,6 @@ public class @MyInputs : IInputActionCollection, IDisposable
                     ""name"": ""Empty Tracked Select"",
                     ""type"": ""Button"",
                     ""id"": ""a33bbf2f-3c07-4df3-bbe5-2f5ba01fb7c3"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""ESC"",
-                    ""type"": ""Button"",
-                    ""id"": ""0451138f-9b65-40d4-998f-00233dc1eadf"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -524,17 +579,6 @@ public class @MyInputs : IInputActionCollection, IDisposable
                     ""action"": ""Empty Tracked Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1027fb64-239b-4161-8a44-91ee050f1479"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ESC"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -573,6 +617,7 @@ public class @MyInputs : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -586,7 +631,6 @@ public class @MyInputs : IInputActionCollection, IDisposable
         m_UI_EmptyTrackedPosition = m_UI.FindAction("Empty Tracked Position", throwIfNotFound: true);
         m_UI_EmptyTrackedOrientation = m_UI.FindAction("Empty Tracked Orientation", throwIfNotFound: true);
         m_UI_EmptyTrackedSelect = m_UI.FindAction("Empty Tracked Select", throwIfNotFound: true);
-        m_UI_ESC = m_UI.FindAction("ESC", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -638,12 +682,14 @@ public class @MyInputs : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @MyInputs m_Wrapper;
         public PlayerActions(@MyInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -659,6 +705,9 @@ public class @MyInputs : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -669,6 +718,9 @@ public class @MyInputs : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -688,7 +740,6 @@ public class @MyInputs : IInputActionCollection, IDisposable
     private readonly InputAction m_UI_EmptyTrackedPosition;
     private readonly InputAction m_UI_EmptyTrackedOrientation;
     private readonly InputAction m_UI_EmptyTrackedSelect;
-    private readonly InputAction m_UI_ESC;
     public struct UIActions
     {
         private @MyInputs m_Wrapper;
@@ -704,7 +755,6 @@ public class @MyInputs : IInputActionCollection, IDisposable
         public InputAction @EmptyTrackedPosition => m_Wrapper.m_UI_EmptyTrackedPosition;
         public InputAction @EmptyTrackedOrientation => m_Wrapper.m_UI_EmptyTrackedOrientation;
         public InputAction @EmptyTrackedSelect => m_Wrapper.m_UI_EmptyTrackedSelect;
-        public InputAction @ESC => m_Wrapper.m_UI_ESC;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -747,9 +797,6 @@ public class @MyInputs : IInputActionCollection, IDisposable
                 @EmptyTrackedSelect.started -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedSelect;
                 @EmptyTrackedSelect.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedSelect;
                 @EmptyTrackedSelect.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnEmptyTrackedSelect;
-                @ESC.started -= m_Wrapper.m_UIActionsCallbackInterface.OnESC;
-                @ESC.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnESC;
-                @ESC.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnESC;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -787,9 +834,6 @@ public class @MyInputs : IInputActionCollection, IDisposable
                 @EmptyTrackedSelect.started += instance.OnEmptyTrackedSelect;
                 @EmptyTrackedSelect.performed += instance.OnEmptyTrackedSelect;
                 @EmptyTrackedSelect.canceled += instance.OnEmptyTrackedSelect;
-                @ESC.started += instance.OnESC;
-                @ESC.performed += instance.OnESC;
-                @ESC.canceled += instance.OnESC;
             }
         }
     }
@@ -816,6 +860,7 @@ public class @MyInputs : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -830,6 +875,5 @@ public class @MyInputs : IInputActionCollection, IDisposable
         void OnEmptyTrackedPosition(InputAction.CallbackContext context);
         void OnEmptyTrackedOrientation(InputAction.CallbackContext context);
         void OnEmptyTrackedSelect(InputAction.CallbackContext context);
-        void OnESC(InputAction.CallbackContext context);
     }
 }

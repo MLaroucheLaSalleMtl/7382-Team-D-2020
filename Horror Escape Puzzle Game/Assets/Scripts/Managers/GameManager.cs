@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour, IGameState
     private void Start()
     {
         gmm = GameMenuManager.instance;
-        Play();
+        UnPause();
     }
 
     public void SetSpawnAsNull() => currentSpawnPoint = null;
@@ -44,6 +44,27 @@ public class GameManager : MonoBehaviour, IGameState
         GameMenuManager.instance.OnPlayerDeath();
         currentSpawnPoint.SpawnPlayer();
     }
+
+    /// <summary>
+    /// Pauses the game.
+    /// </summary>
+    public void Pause()
+    {
+        gmm.Pause();
+        isGamePaused = true;
+        Time.timeScale = 0f;
+    }
+
+    /// <summary>
+    /// Unpauses the game.
+    /// </summary>
+    public void UnPause()
+    {
+        gmm.UnPause();
+        isGamePaused = false;
+        Time.timeScale = 1f;
+    }
+
     private void CreateSingleton()
     {
         if (instance is null)
@@ -55,19 +76,7 @@ public class GameManager : MonoBehaviour, IGameState
             Destroy(gameObject);
         }
     }
-    /// <summary>
-    /// Pauses the game.
-    /// </summary>
-    public void Pause()
-    {
-        gmm.Pause();
-        Time.timeScale = 0f;
-    }
-    public void Play()
-    {
-        gmm.Play();
-        Time.timeScale = 1f;
-    }
+    
     private void OnDestroy()
     {
         instance = null;

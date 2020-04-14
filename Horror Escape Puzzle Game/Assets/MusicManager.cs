@@ -21,7 +21,7 @@ public class MusicManager : MonoBehaviour
 
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -72,7 +72,6 @@ public class MusicManager : MonoBehaviour
         while(audioS.volume <= 0.8)
         {
             audioS.volume = Mathf.Lerp(0f, 0.8f, temp);
-            Debug.Log(audioS.volume);
             yield return null;
             temp += Time.deltaTime;
         }
@@ -84,7 +83,6 @@ public class MusicManager : MonoBehaviour
         while (audioS.volume != 0)
         {
             audioS.volume = Mathf.Lerp(0.8f, 0f, temp);
-            Debug.Log(audioS.volume);
             yield return null;
             temp += Time.deltaTime;
         }

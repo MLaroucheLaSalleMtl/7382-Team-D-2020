@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoaderManager: MonoBehaviour
 {
-
+    
     [Tooltip("Enter the Scene Name you want to load")]
     [SerializeField] private string sceneName = "";
     [SerializeField] private bool activateScene = false;
     private AsyncOperation async = null;
-    private float waitForSeconds = 1.2f;
+    private float waitForSeconds = 3f;
 
     public static SceneLoaderManager instance = null;
     private MusicManager mm = null;
@@ -25,7 +25,7 @@ public class SceneLoaderManager: MonoBehaviour
     private void Start()
     {
         mm = MusicManager.instance;
-
+        
         async = SceneManager.LoadSceneAsync(sceneName);
         async.allowSceneActivation = activateScene;
     }
