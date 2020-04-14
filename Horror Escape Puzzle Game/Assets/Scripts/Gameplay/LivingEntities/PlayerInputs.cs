@@ -41,17 +41,22 @@ public class PlayerInputs : MonoBehaviour
     }
     public void OnEscapeToggle(InputAction.CallbackContext context)
     {
-
-        if (context.performed && gm.IsGamePaused)
+        Debug.Log("test");
+        if (context.performed)
         {
-            gm.Pause();
-            //pauseMenu.SetActive(true);
-        }
-        else
-        {
-            gm.Play();
-            //pauseMenu.SetActive(false);
-        }
+            if (gm.IsGamePaused)
+            {
+                gm.UnPause();
+                Debug.Log("Unpause");
+                //pauseMenu.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("Pause");
+                gm.Pause();
+                //pauseMenu.SetActive(false);
+            }
+        }   
     }
 
     private void OnDisable()

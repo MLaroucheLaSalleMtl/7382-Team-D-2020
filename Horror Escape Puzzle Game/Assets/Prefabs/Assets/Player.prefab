@@ -175,6 +175,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0451138f-9b65-40d4-998f-00233dc1eadf
     m_ActionName: UI/ESC
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8916386794721849238}
+        m_MethodName: OnEscapeToggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6fdcb3ff-2f6b-49e0-968e-7f69d9013568
+    m_ActionName: Player/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

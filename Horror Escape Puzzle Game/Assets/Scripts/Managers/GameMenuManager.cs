@@ -61,7 +61,7 @@ public class GameMenuManager : MonoBehaviour, IGameState
         PauseTimer();
     }
 
-    public void Play()
+    public void UnPause()
     {
         StartTimer();
     }

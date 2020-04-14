@@ -3,18 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public static class Player
-{
-
-    private static int deathCounter = 0; // track death count 
-
-    public static int DeathCounter
-    {
-        get => deathCounter;
-        set => deathCounter = value > deathCounter ? deathCounter : value;
-    }
-}
-
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
 public class Player_Behavior: MonoBehaviour
 {
@@ -114,7 +102,6 @@ public class Player_Behavior: MonoBehaviour
     public void Death()
     {
         StartCoroutine(WaitForSeconds());
-        Player.DeathCounter++;
         OnDeath?.Invoke();
         Destroy(gameObject);
     }

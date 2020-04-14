@@ -20,6 +20,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "6fdcb3ff-2f6b-49e0-968e-7f69d9013568",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -46,7 +54,40 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "Movements Arrow",
+                    "id": "a82a2936-5f49-4025-9980-279efd9408c5",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "a339007b-adae-478b-994c-be277e5effd1",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "e9b81a22-f1bb-49dd-909f-f06df82b5500",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Movements AD",
                     "id": "f1b1cdcb-858d-4c4a-a968-de9e6c00a6b8",
                     "path": "2DVector",
                     "interactions": "",
@@ -81,11 +122,33 @@
                 {
                     "name": "",
                     "id": "79c1988d-f3c6-4975-95f4-fca85994df0c",
-                    "path": "<Gamepad>/leftStick",
+                    "path": "<Gamepad>/dpad",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eeed3b93-4b8d-4cae-85ae-72601c0bead9",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1857934d-fda3-4eab-bbc7-a2ca95e93097",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -179,14 +242,6 @@
                     "name": "Empty Tracked Select",
                     "type": "Button",
                     "id": "a33bbf2f-3c07-4df3-bbe5-2f5ba01fb7c3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "ESC",
-                    "type": "Button",
-                    "id": "0451138f-9b65-40d4-998f-00233dc1eadf",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -509,17 +564,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Empty Tracked Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1027fb64-239b-4161-8a44-91ee050f1479",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ESC",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
