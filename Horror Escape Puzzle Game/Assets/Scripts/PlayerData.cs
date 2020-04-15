@@ -11,6 +11,7 @@ public static class PlayerData
     private static int deathBySaw = 0;
     private static int deathByArrow = 0 ;
     private static int deathByFall = 0;
+    private static int numGamOpentime = 0;
     
     public static int TotalDeaths => deathByFall + deathByArrow + deathBySaw + deathBySpikes;
 
@@ -19,6 +20,7 @@ public static class PlayerData
     public static int DeathBySaw { get => deathBySaw; set => deathBySaw = value < 0 ? 0 : value; }
     public static int DeathByArrow { get => deathByArrow; set => deathByArrow = value < 0 ? 0 : value; }
     public static int DeathByFall { get => deathByFall; set => deathByFall = value < 0 ? 0 : value; }
+    public static int NumGamOpentime { get=> numGamOpentime; set => numGamOpentime = value < 0 ? 0 : value; }
 
     public static void LoadInitialData()
     { 
@@ -26,6 +28,7 @@ public static class PlayerData
         deathBySpikes = PlayerPrefs.GetInt(nameof(deathBySpikes));
         deathByArrow = PlayerPrefs.GetInt(nameof(deathByArrow));
         deathByFall = PlayerPrefs.GetInt(nameof(deathByFall));
+        numGamOpentime = PlayerPrefs.GetInt(nameof(numGamOpentime));
     }
 
     public static void SaveData()
@@ -34,5 +37,6 @@ public static class PlayerData
         PlayerPrefs.SetInt(nameof(deathBySpikes), deathBySpikes);
         PlayerPrefs.SetInt(nameof(deathByArrow), deathByArrow);
         PlayerPrefs.SetInt(nameof(deathByFall), deathByFall);
+        PlayerPrefs.SetInt(nameof(numGamOpentime), numGamOpentime);
     } 
 }

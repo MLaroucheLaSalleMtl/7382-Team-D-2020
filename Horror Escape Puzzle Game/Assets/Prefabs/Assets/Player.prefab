@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 9e44746f6b941514a8c6c5969040b268,
+  m_Actions: {fileID: -944628639613478452, guid: 6ca380cc1dd46f1468518a27e298007c,
     type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
@@ -160,21 +160,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a33bbf2f-3c07-4df3-bbe5-2f5ba01fb7c3
     m_ActionName: UI/Empty Tracked Select
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8916386794721849238}
-        m_MethodName: OnEscapeToggle
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0451138f-9b65-40d4-998f-00233dc1eadf
-    m_ActionName: UI/ESC
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8916386794721849238}

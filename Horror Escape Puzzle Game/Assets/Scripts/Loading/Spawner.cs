@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject playerObj;
     [SerializeField] private bool init = false;
     [SerializeField] private bool playerHasVCam = false;
+    [SerializeField] private bool useGameManager = true;
     private void Start()
     {
         if(init) SpawnPlayer();
@@ -14,9 +15,11 @@ public class Spawner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Spawner: " + (GameManager.instance == null));
-        GameManager gm = GameManager.instance;
-        if (collision.CompareTag("Player")) gm.currentSpawnPoint = this;
+        if (useGameManager)
+        {
+            GameManager gm = GameManager.instance;
+            if (collision.CompareTag("Player")) gm.currentSpawnPoint = this;
+        }
     }
 
     public void SpawnPlayer() 

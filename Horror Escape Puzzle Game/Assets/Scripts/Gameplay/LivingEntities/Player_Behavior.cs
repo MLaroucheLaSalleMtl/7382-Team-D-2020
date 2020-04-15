@@ -69,6 +69,14 @@ public class Player_Behavior: MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("DeathZone"))
+        {
+            Death();
+        }
+    }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Ground") )
@@ -79,14 +87,6 @@ public class Player_Behavior: MonoBehaviour
                 sprt.enabled = false;
             }
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-       if (collision.CompareTag("DeathZone"))
-       {
-           Death();
-       }
     }
 
     public void Jump()

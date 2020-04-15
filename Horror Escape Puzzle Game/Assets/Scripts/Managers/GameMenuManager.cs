@@ -19,7 +19,7 @@ public class GameMenuManager : MonoBehaviour, IGameState
     {
         GameObject timerObj = GameObject.FindGameObjectWithTag("Timer");
 
-        if (timerObj != null) timer = timerObj.GetComponent<Timer>();
+        if (timerObj) timer = timerObj.GetComponent<Timer>();
 
         pauseMenu.SetActive(false);
     }
@@ -42,7 +42,7 @@ public class GameMenuManager : MonoBehaviour, IGameState
     public void OnPlayerDeath()
     {
         PauseTimer();
-        deathScreen?.SetActive(true);   
+        if(deathScreen) deathScreen.SetActive(true);   
     }
     private void CreateSingleton()
     {
@@ -52,7 +52,7 @@ public class GameMenuManager : MonoBehaviour, IGameState
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         }
     }
 
@@ -65,8 +65,7 @@ public class GameMenuManager : MonoBehaviour, IGameState
     {
         StartTimer();
     }
-
-    private void OnDestroy()
+    private void OnApplicationQuit()
     {
         instance = null;
     }
