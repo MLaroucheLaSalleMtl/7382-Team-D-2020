@@ -19,15 +19,24 @@ public class SceneLoaderManager: MonoBehaviour
     {
         CreateSingleton();
 
-        DontDestroyOnLoad(this.gameObject);
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
     }
+
     // Start is called before the first frame update
     private void Start()
     {
-        mm = MusicManager.instance;
-        
+        Screen.SetResolution(1280, 720, false);
+
         async = SceneManager.LoadSceneAsync(sceneName);
         async.allowSceneActivation = activateScene;
+    }
+
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        if (FindObjectOfType<MusicManager>() != null)
+        {
+            mm = GetComponent<MusicManager>();
+        }
     }
 
     /// <summary>
@@ -67,21 +76,32 @@ public class SceneLoaderManager: MonoBehaviour
 
     private IEnumerator WaitForLoadSceneDirectly(string name)
     {
-        mm.FadeOut();
+        FadeOutMusic();
         yield return new WaitForSeconds(waitForSeconds);
-        GameManager.instance?.SetSpawnAsNull();
+        SetPlayerSpawnAsNull();
         SceneManager.LoadScene(name);
-        
+
     }
+
     private IEnumerator WaitForActivateScene()
     {
-        mm.FadeOut();
+        FadeOutMusic();
         yield return new WaitForSeconds(waitForSeconds);
         if (IsLoaded)
         {
-            GameManager.instance?.SetSpawnAsNull();
+            SetPlayerSpawnAsNull();
             async.allowSceneActivation = true;
         }
+    }
+
+    private void SetPlayerSpawnAsNull()
+    {
+        if (GameManager.instance != null) GameManager.instance.SetSpawnAsNull();
+    }
+
+    private void FadeOutMusic()
+    {
+        if (mm != null) mm.FadeOut();
     }
 
     private void CreateSingleton()
@@ -92,11 +112,10 @@ public class SceneLoaderManager: MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         }
     }
-
-    private void OnDestroy()
+    private void OnApplicationQuit()
     {
         instance = null;
     }

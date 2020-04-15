@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour, IGameState
     public static GameManager instance = null;
 
     private GameMenuManager gmm = null;
-
+    private MusicManager mm = null;
     private bool isGamePaused = false;
 
     [HideInInspector]public Spawner currentSpawnPoint;
@@ -16,20 +16,10 @@ public class GameManager : MonoBehaviour, IGameState
     private void Awake()
     { 
         CreateSingleton();
-        
-        DontDestroyOnLoad(gameObject);
 
-        Debug.Log("GM: " + instance);
-    }
-
-    private void Start()
-    {
         gmm = GameMenuManager.instance;
-        UnPause();
+        mm = MusicManager.instance;
     }
-
-    public void SetSpawnAsNull() => currentSpawnPoint = null;
-
     
     /// <summary>
     /// Check if game is currently paused.
@@ -37,7 +27,7 @@ public class GameManager : MonoBehaviour, IGameState
     /// <return>
     /// Returns true or false.
     /// </return>>
-    public bool IsGamePaused { get => isGamePaused; set => isGamePaused = value; }
+    public bool IsGamePaused { get; set; }
 
     public void OnPlayerDeath()
     {
@@ -45,12 +35,26 @@ public class GameManager : MonoBehaviour, IGameState
         currentSpawnPoint.SpawnPlayer();
     }
 
+    public void ChangeGameState()
+    {
+        if (IsGamePaused)
+        {
+            UnPause();
+        }
+        else
+        {
+            Pause();
+        }
+    }
+
     /// <summary>
     /// Pauses the game.
     /// </summary>
     public void Pause()
     {
+        Debug.Log("Pause");
         gmm.Pause();
+        mm.Pause();
         isGamePaused = true;
         Time.timeScale = 0f;
     }
@@ -60,24 +64,30 @@ public class GameManager : MonoBehaviour, IGameState
     /// </summary>
     public void UnPause()
     {
+        Debug.Log("UnPause");
         gmm.UnPause();
+        mm.UnPause();
         isGamePaused = false;
         Time.timeScale = 1f;
     }
 
+    public void SetSpawnAsNull() => currentSpawnPoint = null;
+
     private void CreateSingleton()
     {
-        if (instance is null)
+        if (instance == null)
         {
             instance = this;
+
+            PlayerData.NumGamOpentime++;
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
-    
-    private void OnDestroy()
+
+    private void OnApplicationQuit()
     {
         instance = null;
     }

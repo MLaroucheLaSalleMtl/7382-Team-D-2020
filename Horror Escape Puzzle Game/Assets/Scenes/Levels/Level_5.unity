@@ -3048,6 +3048,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &828276184
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3351,24 +3354,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.1
-  m_PointAction: {fileID: 1054132383583890850, guid: 06799f0e6decc8b4cb571ff007af9f64,
+  m_PointAction: {fileID: 1054132383583890850, guid: 6ca380cc1dd46f1468518a27e298007c,
     type: 3}
-  m_MoveAction: {fileID: 3710738434707379630, guid: 06799f0e6decc8b4cb571ff007af9f64,
+  m_MoveAction: {fileID: 3710738434707379630, guid: 6ca380cc1dd46f1468518a27e298007c,
     type: 3}
-  m_SubmitAction: {fileID: 2064916234097673511, guid: 06799f0e6decc8b4cb571ff007af9f64,
+  m_SubmitAction: {fileID: 2064916234097673511, guid: 6ca380cc1dd46f1468518a27e298007c,
     type: 3}
-  m_CancelAction: {fileID: -1967631576421560919, guid: 06799f0e6decc8b4cb571ff007af9f64,
+  m_CancelAction: {fileID: -1967631576421560919, guid: 6ca380cc1dd46f1468518a27e298007c,
     type: 3}
-  m_LeftClickAction: {fileID: 8056856818456041789, guid: 06799f0e6decc8b4cb571ff007af9f64,
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: 6ca380cc1dd46f1468518a27e298007c,
     type: 3}
-  m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 3837173908680883260, guid: 06799f0e6decc8b4cb571ff007af9f64,
+  m_MiddleClickAction: {fileID: 824467647829060397, guid: 6ca380cc1dd46f1468518a27e298007c,
     type: 3}
-  m_ScrollWheelAction: {fileID: 0}
+  m_RightClickAction: {fileID: 3837173908680883260, guid: 6ca380cc1dd46f1468518a27e298007c,
+    type: 3}
+  m_ScrollWheelAction: {fileID: -7579255722885350352, guid: 6ca380cc1dd46f1468518a27e298007c,
+    type: 3}
   m_TrackedDevicePositionAction: {fileID: 0}
   m_TrackedDeviceOrientationAction: {fileID: 0}
   m_TrackedDeviceSelectAction: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 06799f0e6decc8b4cb571ff007af9f64,
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 6ca380cc1dd46f1468518a27e298007c,
     type: 3}
   m_DeselectOnBackgroundClick: 1
 --- !u!114 &864230358

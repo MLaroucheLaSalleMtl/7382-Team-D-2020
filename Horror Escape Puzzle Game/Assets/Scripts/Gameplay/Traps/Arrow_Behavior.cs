@@ -61,6 +61,8 @@ public class Arrow_Behavior : MonoBehaviour
             Destroy(GetComponent<TrailRenderer>());
             Homing = false;
         }
+
+        if (collision.collider.CompareTag("Player")) PlayerData.DeathByArrow++;
     }
 
     private void DeleteGameobject()

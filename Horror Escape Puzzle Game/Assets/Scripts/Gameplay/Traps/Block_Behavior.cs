@@ -1,5 +1,5 @@
 ﻿
-using System;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,8 +32,8 @@ public class Block_Behavior : MonoBehaviour
 
     private void Start()
     {
-        if (boxColl != null) SetCollderTrigger();
-        if (sprite != null) SetSpriteEnable();
+        if (boxColl) SetCollderTrigger();
+        if (sprite) SetSpriteEnable();
     }
 
     private void SetSpriteEnable()
@@ -86,8 +86,8 @@ public class Block_Behavior : MonoBehaviour
     {
         if (counter == triggerCounter)
         {
-            Invoke("ActivateTrap", trapActivationDelay);
             boxColl.isTrigger = false;
+            Invoke("ActivateTrap", trapActivationDelay);
         }
         else
         {
