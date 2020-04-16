@@ -1,13 +1,12 @@
 ﻿
-using System.ComponentModel.Design.Serialization;
-using System.Text;
 
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 public class Death_Panel_Behavior : MonoBehaviour
 {
-    [SerializeField] private Text deathTxt;
-    [SerializeField] private float timeBeforeClosing;
+    [SerializeField] private Text deathTxt = null;
+    [SerializeField] private float timeBeforeClosing = 1f;
     StringBuilder builder = new StringBuilder();
 
     string[] determinants = { "a", "an", "the", "it", "this",

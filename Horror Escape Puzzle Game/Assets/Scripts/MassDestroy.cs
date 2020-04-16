@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MassDestroy : MonoBehaviour
 {
-    [SerializeField] private GameObject[] objsTobeCleansed;
+    [SerializeField] private GameObject[] objsTobeCleansed = null;
 
     public void Cleanse()
     {

@@ -8,26 +8,24 @@ public class Player_Behavior: MonoBehaviour
 {
     private UnityEvent OnDeath = new UnityEvent();
 
-    private Rigidbody2D rigid;
-
-    private Vector2 movement;
-
-    private SpriteRenderer sprt;
-
-    [SerializeField] private float speed = 4; 
-    [SerializeField] private float upwardsVelocity = 3.5f;
-
+    //Player
+    private SpriteRenderer sprt = null;
+    private Rigidbody2D rigid = null;
+    private Vector2 movement = Vector2.zero;
+    [SerializeField] private float speed = 5;
+    [SerializeField] private float upwardsVelocity = 6.5f;
     public bool HasVCam = false;
-
     private int surfaceContact = 0;
 
-    [SerializeField] private AudioClip[] deathSFX;
-    [SerializeField] private AudioClip[] respawnSFX;
-
+    //SFX
+    [SerializeField] private AudioClip[] deathSFX = null;
+    [SerializeField] private AudioClip[] respawnSFX = null;
+    private AudioSource audioS = null;
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        sprt = GetComponent<SpriteRenderer>();
+        if(GetComponent<Rigidbody2D>()) rigid = GetComponent<Rigidbody2D>();
+        if(GetComponent<SpriteRenderer>()) sprt = GetComponent<SpriteRenderer>();
+        if(GetComponent<AudioSource>()) audioS = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -40,15 +38,19 @@ public class Player_Behavior: MonoBehaviour
 
     private void PlayRespawnSFX()
     {
-        GetComponent<AudioSource>().clip = respawnSFX[UnityEngine.Random.Range(0, respawnSFX.Length)];
-        GetComponent<AudioSource>().Play();
+        if (audioS)
+        {
+            Debug.Log("respawn SFX");
+            audioS.clip = respawnSFX[Random.Range(0, respawnSFX.Length)];
+            audioS.Play();
+        }
     }
 
     public void GetCinemachineVCam()
     {
         GameObject gobj = GameObject.FindGameObjectWithTag("VCam");
         CinemachineVirtualCamera vcam = gobj?.GetComponent<CinemachineVirtualCamera>();
-        if(vcam != null) vcam.Follow = this.gameObject.transform;
+        if(vcam) vcam.Follow = this.gameObject.transform;
     }
 
     private void FixedUpdate()
@@ -103,12 +105,13 @@ public class Player_Behavior: MonoBehaviour
     {
         StartCoroutine(WaitForSeconds());
         OnDeath?.Invoke();
-        Destroy(gameObject);
+        Destroy(gameObject, 0.5f);
     }
 
     private IEnumerator WaitForSeconds()
     {
-        GetComponent<AudioSource>().clip = deathSFX[UnityEngine.Random.Range(0, deathSFX.Length)];
+        Debug.Log("Death SFX");
+        GetComponent<AudioSource>().clip = deathSFX[Random.Range(0, deathSFX.Length)];
         GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(0.5f);
     }

@@ -1,77 +1,76 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour, IGameState
 {
     public static MusicManager instance = null;
 
-    [SerializeField] private AudioClip[] levelMusicClips;
-    [SerializeField] private AudioClip mainMenuClip;
-    [SerializeField] private AudioClip preloaderClip;
+    [SerializeField] private AudioClip[] levelMusicClips = null;
+    [SerializeField] private AudioClip mainMenuClip = null;
+    [SerializeField] private AudioClip preloaderClip = null;
 
-    private AudioSource audioS = null;
-
+    [SerializeField] private GameObject audioObj = null; //Object to instantiate
+    [SerializeField] private AudioSource audioS = null; //The freaking audio source that keeps getting destroyed
+    [SerializeField] private GameObject ASDF = null; // A holder for the instantiated audioObj
     private void Awake()
     {
-
         CreateSingleton();
-        
-        if(GetComponent<AudioSource>()) audioS = GetComponent<AudioSource>();
+        InstantiateAudiSource();
 
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
     }
 
     private void Start()
     {
-        audioS.loop = true;
-        audioS.volume = 0;
-        StartCoroutine(IEnumFadeIn());
+        if (audioS)
+        {
+            audioS.loop = true;
+            audioS.volume = 0;
+            StartCoroutine(IEnumFadeIn());
+        }
     }
 
     private void SceneManager_sceneLoaded(Scene sc, LoadSceneMode loadMode)
     {
-        audioS.volume = 0f;
-
-        AudioClip clip = null;
-
-        switch (sc.name)
-        {
-            case "PreloaderScene":
-                clip = preloaderClip;
-                break;
-
-            case "MainMenuScene":
-                clip = mainMenuClip;
-                break;
-
-            default: //Plays a Level Music
-
-                string sub = sc.name.Substring(sc.name.Length-1);
-
-                for (int i = 0; i < levelMusicClips.Length; i++)
-                {
-                    if(sub == i.ToString())
-                    {
-                        clip = levelMusicClips[i];
-                    }
-                }
-                break;
-        }
-
+        InstantiateAudiSource();
         if (audioS)
         {
+            audioS.volume = 0f;
+
+            AudioClip clip = null;
+
+            switch (sc.name)
+            {
+                case "PreloaderScene":
+                    clip = preloaderClip;
+                    break;
+
+                case "MainMenuScene":
+                    clip = mainMenuClip;
+                    break;
+
+                default: //Plays a Level Music
+
+                    string sub = sc.name.Substring(sc.name.Length-1);
+
+                    for (int i = 0; i < levelMusicClips.Length; i++)
+                    {
+                        if(sub == i.ToString())
+                        {
+                            clip = levelMusicClips[i];
+                        }
+                    }
+                    break;
+            }
+
+        
             audioS.clip = clip;
             audioS.Play();
         }
 
         FadeIn();
-    }
-
-    private void FadeIn()
-    {
-        if(audioS) StartCoroutine(IEnumFadeIn());
     }
 
     private IEnumerator IEnumFadeIn()
@@ -94,28 +93,42 @@ public class MusicManager : MonoBehaviour, IGameState
             yield return null;
             temp += Time.deltaTime;
         }
-    }   
+    }
+
+    private void FadeIn()
+    {
+        if (audioS) StartCoroutine(IEnumFadeIn());
+    }
 
     public void FadeOut()
     {
         if(audioS) StartCoroutine(IEnumFadeOut());
     }
+
     public void Pause() => audioS.Pause();
+
     public void UnPause() => audioS.UnPause();
+
     private void CreateSingleton()
     {
-        if (!instance)
+        if (instance == null)
         {
             instance = this;
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
+
     private void OnApplicationQuit()
     {
         instance = null;
-        Destroy(instance);
+    }
+
+    private void InstantiateAudiSource()
+    {
+        if (!ASDF) ASDF = Instantiate(audioObj);
+        if (ASDF) audioS = ASDF.GetComponent<AudioSource>();
     }
 }

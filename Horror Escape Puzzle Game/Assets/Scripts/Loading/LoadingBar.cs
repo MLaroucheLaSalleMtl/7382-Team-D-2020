@@ -4,24 +4,26 @@ using UnityEngine.UI;
 
 public class LoadingBar : MonoBehaviour
 {
+    private Image loadingBar = null;
+    private SceneLoaderManager sceneLoader = null;
 
-    private Image loadingBar;
-    [SerializeField] private SceneLoaderManager sceneLoader;
+    private void Awake()
+    {
+        sceneLoader = SceneLoaderManager.instance;
+    }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        loadingBar = this.GetComponent<Image>();
-        
+        if(GetComponent<Image>()) loadingBar = GetComponent<Image>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!sceneLoader.IsLoaded)
         {
             loadingBar.fillAmount = sceneLoader.Progress;
         }
-
     }
 }

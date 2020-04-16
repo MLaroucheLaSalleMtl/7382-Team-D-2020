@@ -7,20 +7,18 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
 {
 
     #region Fields
-    [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject projectile = null;
 
     public enum FiringMode { None, Auto, Trigger, Burst, Rand, Homing, TriggerHoming}
-    [HideInInspector, SerializeField] private FiringMode firingMode;
+    [HideInInspector, SerializeField] private FiringMode firingMode = FiringMode.None;
     
     //Invoke Repeating
-    [HideInInspector, SerializeField] public float delay;
-    [HideInInspector, SerializeField] public float repeatRate;
-
-    [HideInInspector, SerializeField] public float burstDelay;
+    [HideInInspector, SerializeField] public float delay = 0f;
+    [HideInInspector, SerializeField] public float repeatRate = 1f;
+    [HideInInspector, SerializeField] public float burstDelay = 0f;
 
     [Range(1f,20f)]
-    [SerializeField] private float arrowSpeed;
-
+    [SerializeField] private float arrowSpeed = 0f;
 
     //Tracking
     [SerializeField] private bool trackPlayer = false;
@@ -31,8 +29,8 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        projectile.GetComponent<Arrow_Behavior>().Homing = false;
+        if(gameObject) gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        if(projectile) projectile.GetComponent<Arrow_Behavior>().Homing = false;
 
         ModeSelection();
     }
@@ -51,7 +49,6 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
             Transform trans = target.GetComponent<Transform>();
 
             transform.up = trans.position - transform.position;
-
         }
     }
 
@@ -65,7 +62,7 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
 
             case FiringMode.Trigger:
             case FiringMode.TriggerHoming:
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                if(gameObject) gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 break;
 
             case FiringMode.Burst:  // kind of useless
@@ -78,7 +75,7 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
                 break;
 
             case FiringMode.Homing:
-                projectile.GetComponent<Arrow_Behavior>().Homing = true;
+                if(projectile) projectile.GetComponent<Arrow_Behavior>().Homing = true;
                 goto case FiringMode.Auto;
           
         }
@@ -91,7 +88,7 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
 
     private void Fire()
     {
-        projectile.GetComponent<Arrow_Behavior>().Speed = (firingMode != FiringMode.Trigger) ? this.arrowSpeed : this.arrowSpeed * 2f;
+        if(projectile) projectile.GetComponent<Arrow_Behavior>().Speed = (firingMode != FiringMode.Trigger) ? this.arrowSpeed : this.arrowSpeed * 2f;
         Instantiate(projectile, this.gameObject.transform.position, this.gameObject.transform.rotation);
     }
 

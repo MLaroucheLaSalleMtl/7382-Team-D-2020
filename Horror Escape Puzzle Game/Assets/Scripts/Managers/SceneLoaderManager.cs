@@ -33,10 +33,7 @@ public class SceneLoaderManager: MonoBehaviour
 
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        if (FindObjectOfType<MusicManager>() != null)
-        {
-            mm = GetComponent<MusicManager>();
-        }
+        if (FindObjectOfType<MusicManager>()) mm = GetComponent<MusicManager>();
     }
 
     /// <summary>

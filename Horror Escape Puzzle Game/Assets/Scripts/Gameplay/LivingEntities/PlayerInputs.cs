@@ -5,10 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
-    private GameManager gm = null;
 
     private MyInputs playerInputActions;
-    private bool locked = true;
+    private bool locked = false;
 
     [SerializeField] private float inputLockTimer = 0f; // TODO: Link to the something instead of gettign vlaue
 
@@ -18,7 +17,6 @@ public class PlayerInputs : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new MyInputs();
-        gm = GameManager.instance;
     }
     private void Start()
     {
@@ -43,12 +41,12 @@ public class PlayerInputs : MonoBehaviour
 
     public void OnJumpCall(InputAction.CallbackContext context)
     {
-        if (!locked) OnJumpCtx?.Invoke();
+        if (!locked && context.started) OnJumpCtx?.Invoke();
     }
     public void OnEscapeToggle(InputAction.CallbackContext context)
     {
-        Debug.Log("Toggleed Esscpale");
-        OnPauseToggle?.Invoke(); 
+        Debug.Log("Excape toggle");
+        if(context.started) OnPauseToggle?.Invoke();
     }
 
     private void AddListeners()
