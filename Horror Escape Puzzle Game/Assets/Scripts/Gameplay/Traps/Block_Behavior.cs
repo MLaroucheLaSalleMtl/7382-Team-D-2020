@@ -10,24 +10,24 @@ public class Block_Behavior : MonoBehaviour
     private enum ColliderChoice { Collision, Trigger };
 
     [Header("Set Block visibility")]
-    [SerializeField] private bool startVisible;
+    [SerializeField] private bool startVisible = true;
 
     [Tooltip("Number of times before the trap gets triggered")]
-    [SerializeField] private int triggerCounter;
-    [SerializeField] private float trapActivationDelay;
-    [SerializeField] private ColliderChoice colliderType;
-    private int counter;
+    [SerializeField] private int triggerCounter = 0;
+    [SerializeField] private float trapActivationDelay = 0f;
+    [SerializeField] private ColliderChoice colliderType = ColliderChoice.Collision;
 
-    [HideInInspector] private SpriteRenderer sprite;
+    private SpriteRenderer sprite = null;
+    private BoxCollider2D boxColl = null;
 
-    private BoxCollider2D boxColl;
+    private int counter = 0;
 
     public UnityEvent OnTrapActivation;
 
     private void Awake()
     {
-        boxColl = GetComponent<BoxCollider2D>();
-        sprite = GetComponent<SpriteRenderer>();
+        if(boxColl) GetComponent<BoxCollider2D>();
+        if(sprite) GetComponent<SpriteRenderer>();
     }
 
     private void Start()

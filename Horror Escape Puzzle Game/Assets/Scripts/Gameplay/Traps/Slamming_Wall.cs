@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
-
 
 [RequireComponent(typeof(BoxCollider2D))]
 
@@ -12,34 +10,33 @@ public class Slamming_Wall : MonoBehaviour
     public enum Directions { Up, Down, Left, Right }
     public Directions orientation;
 
-    [HideInInspector] private Vector2 v2Direction;
+    [HideInInspector] private Vector2 v2Direction = Vector2.zero;
 
-    [HideInInspector] private Vector2 originalPos;
+    [HideInInspector] private Vector2 originalPos = Vector2.zero;
 
     [Range(1f, 5f)] 
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 0f;
 
-    [SerializeField] private float attackSpeed;
+    [SerializeField] private float attackSpeed = 10f;
 
     [Header("Reset Position Timer")]
     [Tooltip("Time that takes to call the reset position function.")]
     [Range(0f, 5f)] 
-    [SerializeField] private float resetTimer;
+    [SerializeField] private float resetTimer = 0f;
 
 
-    private bool hasPrey;
-    private Rigidbody2D rigid;
+    private bool hasPrey = false;
+    private Rigidbody2D rigid = null;
 
     // Start is called before the first frame update
     private void Start()
     {
         //Saves starting position
         originalPos = this.gameObject.transform.position;
-        rigid = GetComponent<Rigidbody2D>();
+        if(rigid) GetComponent<Rigidbody2D>();
         hasPrey = false;
 
-
-        //Picks the right direction
+        //Picks the right direction basically this forces the gameobject to go one direction
         switch (orientation)
         {
             case Directions.Up:

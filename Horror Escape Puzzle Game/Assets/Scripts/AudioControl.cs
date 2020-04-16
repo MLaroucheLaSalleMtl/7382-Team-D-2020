@@ -6,8 +6,11 @@ using UnityEngine.UI;
 
 public class AudioControl : MonoBehaviour
 {
-    [SerializeField] private AudioMixer audioM;
-    [SerializeField] private Slider sVolMaster, sVolUI, sVolSFX, sVolMusic;
+    [SerializeField] private AudioMixer audioM = null;
+    [SerializeField] private Slider sVolMaster = null, 
+                                    sVolUI = null, 
+                                    sVolSFX = null, 
+                                    sVolMusic = null;
 
     // Start is called before the first frame update
     void Start()

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 514005972724607423}
   - component: {fileID: 4814120431064548656}
   - component: {fileID: 1508477961148560142}
-  - component: {fileID: 1545456650033874255}
+  - component: {fileID: 6199315253836183215}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  upwardsVelocity: 3.5
+  upwardsVelocity: 6.5
   HasVCam: 1
   deathSFX:
   - {fileID: 8300000, guid: eb4a80e1bffff6d459d88471b5d12f26, type: 3}
@@ -230,20 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputLockTimer: 0
-  OnJumpCtx:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6671918909094185972}
-        m_MethodName: Jump
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!198 &514005972724607423
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5016,7 +5002,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!82 &1545456650033874255
+--- !u!82 &6199315253836183215
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5028,7 +5014,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 7035236915315913303, guid: a3f907a4f94798e49a91d876f86ef0ed,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5073,7 +5059,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

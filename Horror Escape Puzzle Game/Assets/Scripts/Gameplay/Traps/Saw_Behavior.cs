@@ -12,24 +12,24 @@ public class Saw_Behavior : MonoBehaviour
     private enum Rotation { Clockwise, Counter_Clockwise }
     [SerializeField] private Rotation rotate = Rotation.Clockwise;
 
-    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private Transform[] waypoints = null;
 
     
     [Range(0f,360f), SerializeField] private float speed = 0f;
 
     [Tooltip("Do you want the Saw to follow the path forever?")]
     [HideInInspector] private int targetWaypoint = 0;
-    [HideInInspector] private LineRenderer path;
+    [HideInInspector] private LineRenderer path = null;
 
 
     //For the saw orbit
     [Tooltip("Create an Anchor, then make Saw a child of Anchor.")]
-    [SerializeField] private Transform anchor;
+    [SerializeField] private Transform anchor = null;
     #endregion
 
     private void Awake()
     {
-        path = this.GetComponent<LineRenderer>();
+        if(path) path = GetComponent<LineRenderer>();
     }
 
     // Start is called before the first frame update

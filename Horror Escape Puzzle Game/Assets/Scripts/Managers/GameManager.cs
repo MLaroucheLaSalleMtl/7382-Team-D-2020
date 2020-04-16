@@ -1,5 +1,4 @@
 ﻿
-
 using UnityEngine;
 
 public class GameManager : MonoBehaviour, IGameState
@@ -17,8 +16,10 @@ public class GameManager : MonoBehaviour, IGameState
     { 
         CreateSingleton();
 
-        gmm = GameMenuManager.instance;
-        mm = MusicManager.instance;
+        if(GetComponent<GameMenuManager>()) gmm = GetComponent<GameMenuManager>();
+        else Debug.Log("Menu Manager is Missing");
+        if (MusicManager.instance) mm = MusicManager.instance;
+        else Debug.Log("Music Manager is Missing");
     }
     
     /// <summary>
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour, IGameState
     /// <return>
     /// Returns true or false.
     /// </return>>
-    public bool IsGamePaused { get; set; }
+    public bool IsGamePaused { get => isGamePaused; set=> isGamePaused = value; }
 
     public void OnPlayerDeath()
     {
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour, IGameState
         Debug.Log("Pause");
         gmm.Pause();
         mm.Pause();
-        isGamePaused = true;
+        IsGamePaused = true;
         Time.timeScale = 0f;
     }
 
@@ -67,7 +68,7 @@ public class GameManager : MonoBehaviour, IGameState
         Debug.Log("UnPause");
         gmm.UnPause();
         mm.UnPause();
-        isGamePaused = false;
+        IsGamePaused = false;
         Time.timeScale = 1f;
     }
 
@@ -78,14 +79,19 @@ public class GameManager : MonoBehaviour, IGameState
         if (instance == null)
         {
             instance = this;
-
-            PlayerData.NumGamOpentime++;
         }
         else
         {
             Destroy(this);
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDestroy()
+    {
+        PlayerData.SaveData();
+    }
+#endif
 
     private void OnApplicationQuit()
     {

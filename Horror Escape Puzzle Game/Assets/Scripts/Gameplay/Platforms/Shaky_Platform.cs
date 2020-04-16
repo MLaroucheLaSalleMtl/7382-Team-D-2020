@@ -5,16 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D), typeof(Rigidbody2D))]
 public class Shaky_Platform : MonoBehaviour
 {
-    private BoxCollider2D coll;
-    private Rigidbody2D rigid;
+    private BoxCollider2D coll = null;
+    private Rigidbody2D rigid = null;
 
-    private Vector2 initPosition;
+    private Vector2 initPosition = Vector2.zero;
 
     [Tooltip("The time take takes before the platform drops.")]
-    [SerializeField] private float delayTime;
+    [SerializeField] private float delayTime = 0f;
 
     [Range(1f,10f)]
-    [SerializeField] private float gravity;
+    [SerializeField] private float gravity = 1f;
 
     [SerializeField] private float respawnTimer = 5f;
 

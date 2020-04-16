@@ -9,8 +9,8 @@ public class Platform_Behavior : MonoBehaviour
 {
     
     [Tooltip("2 waypoints are enough")]
-    [SerializeField] private Transform[] waypoints;
-    [SerializeField] private float speed;
+    [SerializeField] private Transform[] waypoints = null;
+    [SerializeField] private float speed = 1f;
 
     //Custom Update Values
     [SerializeField] private float initDelay = 0f;
@@ -20,16 +20,13 @@ public class Platform_Behavior : MonoBehaviour
     [SerializeField] private float platformIdleTime = 0f;
     private bool toggle = false;
 
-    private int targetWaypoint;
-
+    private int targetWaypoint = 1;
 
     void Start()
     {
         ToggleOn();
 
         this.gameObject.transform.position = waypoints[0].position;
-
-        targetWaypoint = 1; // Basically initial + 1;
 
         InvokeRepeating("CustomUpdate", initDelay, repeateRate);
     }

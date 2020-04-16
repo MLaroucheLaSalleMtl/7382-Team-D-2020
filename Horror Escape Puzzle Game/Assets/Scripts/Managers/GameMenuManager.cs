@@ -4,8 +4,8 @@ using UnityEngine;
 public class GameMenuManager : MonoBehaviour, IGameState
 {
 
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject deathScreen;
+    [SerializeField] private GameObject pauseMenu = null;
+    [SerializeField] private GameObject deathScreen = null;
 
     public static GameMenuManager instance = null;
     private Timer timer = null;
@@ -59,12 +59,15 @@ public class GameMenuManager : MonoBehaviour, IGameState
     public void Pause()
     {
         PauseTimer();
+        pauseMenu.SetActive(true);
     }
 
     public void UnPause()
     {
         StartTimer();
+        pauseMenu.SetActive(false);
     }
+
     private void OnApplicationQuit()
     {
         instance = null;

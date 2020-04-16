@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(EdgeCollider2D))]
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject playerObj;
+    [SerializeField] private GameObject playerObj = null;
     [SerializeField] private bool init = false;
     [SerializeField] private bool playerHasVCam = false;
     [SerializeField] private bool useGameManager = true;

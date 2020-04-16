@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class DisplayPlayerData : MonoBehaviour
 {
 
-    [SerializeField] private Text[] texts;
+    [SerializeField] private Text[] texts = null;
 
     private void Awake()
     {
@@ -51,5 +51,4 @@ public class DisplayPlayerData : MonoBehaviour
             txt.text = temp;
         }
     }
-
 }
