@@ -34,6 +34,8 @@ public class SceneActivationDestroyTracker : MonoBehaviour
         GameManager.Instance.SceneUtil_OnActivation();
         MusicManager.Instance.SceneUtil_OnActivation();
         SceneLoaderManager.Instance.SceneUtil_OnActivation();
+
+        Controls.Instance.Locked = false;
     }
 
     public static void LoadNext()
@@ -44,6 +46,8 @@ public class SceneActivationDestroyTracker : MonoBehaviour
         GameManager.Instance.SceneUtil_LoadNextScene();
         MusicManager.Instance.SceneUtil_LoadNextScene();
         SceneLoaderManager.Instance.SceneUtil_LoadNextScene();
+
+        Controls.Instance.Locked = true;
     } 
 
     private void OnDestroy()

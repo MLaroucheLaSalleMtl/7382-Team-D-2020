@@ -352,12 +352,12 @@ GameObject:
   - component: {fileID: 206954793}
   - component: {fileID: 206954795}
   - component: {fileID: 206954794}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &206954793
 Transform:
@@ -460,12 +460,12 @@ GameObject:
   - component: {fileID: 337109278}
   - component: {fileID: 337109280}
   - component: {fileID: 337109279}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &337109278
 Transform:
@@ -3056,12 +3056,12 @@ GameObject:
   - component: {fileID: 1743663021}
   - component: {fileID: 1743663023}
   - component: {fileID: 1743663022}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1743663021
 Transform:
@@ -4023,12 +4023,12 @@ GameObject:
   - component: {fileID: 2139454868}
   - component: {fileID: 2139454870}
   - component: {fileID: 2139454869}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2139454868
 Transform:
