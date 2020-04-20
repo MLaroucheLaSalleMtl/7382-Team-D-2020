@@ -56,7 +56,8 @@ public class SceneLoaderManager: MonoBehaviour, ISceneUtility
 
     private IEnumerator WaitFor_LoadSceneDirectly(string name)
     {
-        yield return new WaitForSeconds(waitForSeconds);
+        //yield return new WaitForSeconds(waitForSeconds);
+        yield return null;
         SceneManager.LoadScene(name);
         async.allowSceneActivation = true;
 

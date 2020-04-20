@@ -36,6 +36,7 @@ public class SceneActivationDestroyTracker : MonoBehaviour
         SceneLoaderManager.Instance.SceneUtil_OnActivation();
 
         Controls.Instance.Locked = false;
+        LoadSceneDirectly.Instance.HasBeenActivated = false;
     }
 
     public static void LoadNext()
