@@ -8,7 +8,7 @@ public class Controls : MonoBehaviour
 
     public static Controls Instance = null;
 
-    private bool locked = false;
+    public bool Locked = false;
 
     [SerializeField] private float inputLockTimer = 0f; // TODO: Link to the something instead of gettign vlaue
 
@@ -27,8 +27,11 @@ public class Controls : MonoBehaviour
 
     private void OnEnable()
     {
-        Invoke("Unlock", inputLockTimer);
+        Invoke(nameof(Unlock), inputLockTimer);
     }
+
+    private void Unlock() => Locked = false;
+
 
 #if UNITY_EDITOR
     private void Update() //For Testing only
@@ -37,14 +40,12 @@ public class Controls : MonoBehaviour
     }
 #endif
 
-    private void Unlock() => locked = false; 
-
     public void OnMove(InputAction.CallbackContext context)
     {
 #if UNITY_EDITOR
         Debug.Log(nameof(Controls) + ": Move" + context.ReadValue<Vector2>().x);
 #endif
-        if (!locked)
+        if (!Locked)
         {
             UAction_OnMove?.Invoke(context.ReadValue<Vector2>());
         }
@@ -55,7 +56,7 @@ public class Controls : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log(nameof(Controls) + ": Jump Press");
 #endif
-        if (!locked && context.started)
+        if (!Locked && context.started)
         {
             UAction_OnJump?.Invoke();
         }
@@ -65,7 +66,7 @@ public class Controls : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log(nameof(Controls) + ": Escape Toggle");
 #endif
-        if (!locked && context.started)
+        if (!Locked && context.started)
         {
             UAction_OnEscapePress?.Invoke();
         }
@@ -78,7 +79,7 @@ public class Controls : MonoBehaviour
         Debug.Log(nameof(Controls) + ": Controller Cursor Navigate " + context.ReadValue<Vector2>()
             + "\nCurrent Position: " + Mouse.current.position.ReadValue());
 #endif
-        if (!locked )
+        if (!Locked )
         { 
             UAction_OnCursorNavigate?.Invoke(context.performed,context.ReadValue<Vector2>());
         }
@@ -90,7 +91,7 @@ public class Controls : MonoBehaviour
         Debug.Log(nameof(Controls) + ": Cursor Click" + Mouse.current.leftButton.isPressed);
 #endif
 
-        if (!locked )
+        if (!Locked )
         {
             UAction_OnControllerClick?.Invoke();
 
@@ -102,7 +103,7 @@ public class Controls : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log(nameof(Controls) + ": Button Cancel");
 #endif
-        if(!locked && context.performed)
+        if(!Locked && context.performed)
         {
             UAction_OnCancel?.Invoke();
         }
@@ -126,6 +127,6 @@ public class Controls : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Destroy(Instance);
+        Instance = null;
     }
 }

@@ -1,13 +1,15 @@
 ﻿
-
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoadSceneDirectly : MonoBehaviour
 {
+    private bool hasBeenActivated = false;
     public void LoadScene(string name)
     {
-        Debug.Log("Standalone Load SCene");
-        SceneManager.LoadScene(name);
+        if (!hasBeenActivated) 
+        {
+            SceneLoaderManager.Instance.LoadSceneDirectly(name);
+            hasBeenActivated = true;
+        }
     }
 }

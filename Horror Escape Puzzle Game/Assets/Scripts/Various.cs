@@ -6,13 +6,13 @@ public class Various : MonoBehaviour
 
     public void Quit()
     {
-        StartCoroutine(IEnumQuitApplication());
+        Application.Quit();
     }
 
-
-    private IEnumerator IEnumQuitApplication()
+    public void Fade_B4_Action()
     {
-        yield return new WaitForSeconds(3f);
-        Application.Quit();
+        MusicManager.Instance.FadeOut();
+        SceneLoaderManager.Instance.FadeOut();
+        Controls.Instance.Locked = true;
     }
 }

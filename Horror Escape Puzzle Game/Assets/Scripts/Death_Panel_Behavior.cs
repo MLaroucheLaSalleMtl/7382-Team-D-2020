@@ -5,6 +5,8 @@ public class Death_Panel_Behavior : MonoBehaviour
 {
     [SerializeField] private Text deathTxt = null;
 
+    private int previousText = -1; 
+
     private string[] positiveSentences =
     {
         "You can do this!",
@@ -32,7 +34,14 @@ public class Death_Panel_Behavior : MonoBehaviour
 
     private void OnEnable()
     {
-        deathTxt.text = positiveSentences[Random.Range(0, positiveSentences.Length)];
+        int currText;
+        do //prevent displaying the texts twice in a row
+        {
+            currText = Random.Range(0, positiveSentences.Length);
+
+        } while (currText == previousText);       
+
+        deathTxt.text = positiveSentences[currText];
         Invoke(nameof(ClosePanel), Settings.DeathWaitTimer);
     }
 

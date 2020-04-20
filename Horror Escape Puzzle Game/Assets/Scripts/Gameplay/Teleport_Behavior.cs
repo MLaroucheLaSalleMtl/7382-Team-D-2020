@@ -17,8 +17,11 @@ public class Teleport_Behavior : MonoBehaviour
             {
                 throw new NullReferenceException(nameof(Teleport_Behavior).ToUpper()
                     + ": Scene Loader Manager is missing");
-#endif
             }
+#endif
         }
     }
 }
+
+
+

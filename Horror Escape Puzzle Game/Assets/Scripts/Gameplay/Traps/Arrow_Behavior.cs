@@ -13,8 +13,8 @@ public class Arrow_Behavior : MonoBehaviour
 
     public float Speed { set => speed = value; }
 
-    [SerializeField] private GameObject speed_VFX;
-    [SerializeField] private ParticleSystem onHit_VFX;
+    [SerializeField] private GameObject speed_VFX = null;
+    [SerializeField] private ParticleSystem onHit_VFX = null;
 
     private void Awake()
     {

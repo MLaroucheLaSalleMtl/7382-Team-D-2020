@@ -74,7 +74,7 @@ public class MusicManager : MonoBehaviour, IGameState, ISceneUtility
 #endif
     }
 
-    private void FadeOut()
+    public void FadeOut() //Public because I need it to be called elsewhere
     {
         if (audioS)
         {

@@ -8,7 +8,7 @@ public class ScaleUpCredits : MonoBehaviour
     {
         transform.localScale = new Vector3(0,0,0);
 
-        InvokeRepeating("ScaleUp", 0f, 0.05f);
+        InvokeRepeating(nameof(ScaleUp), 0f, 0.05f);
     }
     private void ScaleUp()
     {
