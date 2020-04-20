@@ -5,12 +5,15 @@ using UnityEngine.InputSystem;
 
 public class AnyKeyPress : MonoBehaviour
 {
-    public UnityEvent OnAnyKey;
+    public UnityEvent OnEscapePressed;
 
-    public void OnEscapePress()
+    public void OnEscapePress(InputAction.CallbackContext context)
     {
-        OnAnyKey?.Invoke();
-        //inputAction.OnEscapeToggle(InputAction.CallbackContext context);
+        if (context.started)
+        {
+            OnEscapePressed?.Invoke();
+        }
+        
     }
 
 }

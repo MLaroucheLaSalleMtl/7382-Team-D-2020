@@ -11,13 +11,14 @@ TagManager:
   - Arrow
   - Saw
   - EventSystem
-  - TestDummy
   - GameManager
   - SceneManager
   - TransFadeOut
   - DeathZone
   - VCam
   - Timer
+  - InputSystem
+  - TransFadeIn
   layers:
   - Default
   - TransparentFX

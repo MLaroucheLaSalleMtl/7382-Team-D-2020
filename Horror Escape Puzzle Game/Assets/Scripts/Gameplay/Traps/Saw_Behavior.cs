@@ -29,7 +29,7 @@ public class Saw_Behavior : MonoBehaviour
 
     private void Awake()
     {
-        if(path) path = GetComponent<LineRenderer>();
+        if(!path) path = GetComponent<LineRenderer>();
     }
 
     // Start is called before the first frame update
@@ -44,7 +44,7 @@ public class Saw_Behavior : MonoBehaviour
         switch (behavior)
         {
             case Behavior.Translate:
-                this.gameObject.transform.position = anchor.position;
+                gameObject.transform.position = anchor.position;
                 anchor.position = waypoints[0].position;
                 path.positionCount = waypoints.Length + 1;
                 DrawPath(); 

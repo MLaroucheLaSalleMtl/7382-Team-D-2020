@@ -10,10 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2478655133417188446}
   - component: {fileID: 1380768597}
-  - component: {fileID: -270764500692594167}
   - component: {fileID: -3530824844745486066}
   - component: {fileID: 6671918909094185972}
-  - component: {fileID: 8916386794721849238}
   - component: {fileID: 514005972724607423}
   - component: {fileID: 4814120431064548656}
   - component: {fileID: 1508477961148560142}
@@ -60,126 +58,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &-270764500692594167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2601472234466358501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 6ca380cc1dd46f1468518a27e298007c,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8916386794721849238}
-        m_MethodName: OnMoveCall
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c6f47f5a-5043-4f96-a541-13a52675eb68
-    m_ActionName: Player/Move[/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8916386794721849238}
-        m_MethodName: OnJumpCall
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3f60b098-f728-439f-8904-0457e42593ff
-    m_ActionName: Player/Jump[/Keyboard/w]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ab555758-17db-443b-868a-6b1836a0373f
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 21ccf413-66cc-4ab9-b8bd-7f56ef66f498
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 17e51dcb-7938-436b-b97a-74e7ce17bfd1
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 40a3988b-3dd4-410a-9db2-a5d9d46cfeb7
-    m_ActionName: UI/Point[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 834e1ce2-87ca-4dd8-9a76-2b82f905e2e1
-    m_ActionName: UI/Click[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 50bad8d2-1a00-44f4-9efa-95de047b98b0
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5475141a-cb9f-4f50-ae7c-37fdd7856f3c
-    m_ActionName: UI/Middle Click[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3db76a4d-a66b-4430-b809-9af90f67e812
-    m_ActionName: UI/Scroll Wheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d2917022-7feb-4a27-9403-c60c44d792e9
-    m_ActionName: UI/Empty Tracked Position
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3efe0347-7f78-47cc-834c-05af1502db18
-    m_ActionName: UI/Empty Tracked Orientation
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a33bbf2f-3c07-4df3-bbe5-2f5ba01fb7c3
-    m_ActionName: UI/Empty Tracked Select
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8916386794721849238}
-        m_MethodName: OnEscapeToggle
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6fdcb3ff-2f6b-49e0-968e-7f69d9013568
-    m_ActionName: Player/Pause[/Keyboard/escape]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!58 &-3530824844745486066
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -208,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d95921a6c068f1419d0a2ce1eb14a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 5.5
   upwardsVelocity: 6.5
   HasVCam: 1
   deathSFX:
@@ -217,19 +95,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e44ed1b27577ad1418149daf803dd8a8, type: 3}
   respawnSFX:
   - {fileID: 8300000, guid: 925d92efcb930fb41b522c331e0a78b1, type: 3}
---- !u!114 &8916386794721849238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2601472234466358501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b60e92f7e57cce7478e2d737de8444af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputLockTimer: 0
 --- !u!198 &514005972724607423
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5015,7 +4880,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0

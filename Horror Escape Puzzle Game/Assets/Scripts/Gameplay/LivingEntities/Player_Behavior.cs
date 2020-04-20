@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,27 +31,12 @@ public class Player_Behavior: MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.instance != null) OnDeath.AddListener(GameManager.instance.OnPlayerDeath);
+        if(GameManager.Instance != null) OnDeath.AddListener(GameManager.Instance.OnPlayerDeath);
         if(HasVCam) GetCinemachineVCam();
 
+        AddListeners();
+
         PlayRespawnSFX();
-    }
-
-    private void PlayRespawnSFX()
-    {
-        if (audioS)
-        {
-            Debug.Log("respawn SFX");
-            audioS.clip = respawnSFX[Random.Range(0, respawnSFX.Length)];
-            audioS.Play();
-        }
-    }
-
-    public void GetCinemachineVCam()
-    {
-        GameObject gobj = GameObject.FindGameObjectWithTag("VCam");
-        CinemachineVirtualCamera vcam = gobj?.GetComponent<CinemachineVirtualCamera>();
-        if(vcam) vcam.Follow = this.gameObject.transform;
     }
 
     private void FixedUpdate()
@@ -91,7 +77,28 @@ public class Player_Behavior: MonoBehaviour
         }
     }
 
-    public void Jump()
+    private void OnDestroy()
+    {
+        RemoveListeners();
+    }
+
+    private void PlayRespawnSFX()
+    {
+        if (audioS)
+        {
+            Debug.Log("respawn SFX");
+            audioS.clip = respawnSFX[UnityEngine.Random.Range(0, respawnSFX.Length)];
+            audioS.Play();
+        }
+    }
+
+    public void GetCinemachineVCam()
+    {
+        GameObject gObj = GameObject.FindGameObjectWithTag("VCam");
+        if (gObj) gObj.GetComponent<CinemachineVirtualCamera>().Follow = gameObject.transform;
+    }
+
+    private void Jump()
     {
         if (CanJump)
         {
@@ -103,6 +110,7 @@ public class Player_Behavior: MonoBehaviour
 
     public void Death()
     {
+        GetComponent<Collider2D>().enabled = false; // Prevents the player to die multiple times and bug out
         StartCoroutine(WaitForSeconds());
         OnDeath?.Invoke();
         Destroy(gameObject, 0.5f);
@@ -111,11 +119,32 @@ public class Player_Behavior: MonoBehaviour
     private IEnumerator WaitForSeconds()
     {
         Debug.Log("Death SFX");
-        GetComponent<AudioSource>().clip = deathSFX[Random.Range(0, deathSFX.Length)];
+        GetComponent<AudioSource>().clip = deathSFX[UnityEngine.Random.Range(0, deathSFX.Length)];
         GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(0.5f);
     }
 
-    public void SetMovement(Vector2 direction) => movement = direction;
+    private void Move(Vector2 direction) => movement = direction;
 
+    private void AddListeners()
+    {
+        Controls ctrls = Controls.Instance;
+
+        if (ctrls)
+        {
+            ctrls.UAction_OnJump += Jump;
+            ctrls.UAction_OnMove += Move;
+        }
+    }
+
+    private void RemoveListeners()
+    {
+        Controls ctrls = Controls.Instance;
+
+        if (ctrls)
+        {
+            ctrls.UAction_OnJump -= Jump;
+            ctrls.UAction_OnMove -= Move;
+        }
+    }
 }

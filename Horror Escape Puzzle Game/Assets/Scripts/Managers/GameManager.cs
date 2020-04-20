@@ -1,44 +1,48 @@
 ﻿
+using System;
+using System.Collections;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour, IGameState
+public class GameManager : MonoBehaviour, IGameState, ISceneUtility
 {
+    public static GameManager Instance = null;
 
-    public static GameManager instance = null;
-
-    private GameMenuManager gmm = null;
-    private MusicManager mm = null;
     private bool isGamePaused = false;
+    private bool sceneIsLevel = false;
 
-    [HideInInspector]public Spawner currentSpawnPoint;
+    [HideInInspector]public Spawner CurrentSpawnPoint;
 
     private void Awake()
-    { 
+    {
         CreateSingleton();
-
-        if(GetComponent<GameMenuManager>()) gmm = GetComponent<GameMenuManager>();
-        else Debug.Log("Menu Manager is Missing");
-        if (MusicManager.instance) mm = MusicManager.instance;
-        else Debug.Log("Music Manager is Missing");
     }
-    
+
+    private void Start()
+    {
+        AddListeners();
+    }
+
     /// <summary>
     /// Check if game is currently paused.
     /// </summary>
     /// <return>
     /// Returns true or false.
     /// </return>>
-    public bool IsGamePaused { get => isGamePaused; set=> isGamePaused = value; }
+    public bool IsGamePaused { get => isGamePaused; }
 
     public void OnPlayerDeath()
     {
-        GameMenuManager.instance.OnPlayerDeath();
-        currentSpawnPoint.SpawnPlayer();
+        GameMenuManager.Instance.OnPlayerDeath();
+
+        StartCoroutine(WaitForSeconds());
     }
 
-    public void ChangeGameState()
+    public void GamePauseToggler()
     {
-        if (IsGamePaused)
+        if (!sceneIsLevel)
+            return;
+
+        if (isGamePaused)
         {
             UnPause();
         }
@@ -53,10 +57,11 @@ public class GameManager : MonoBehaviour, IGameState
     /// </summary>
     public void Pause()
     {
-        Debug.Log("Pause");
-        gmm.Pause();
-        mm.Pause();
-        IsGamePaused = true;
+        
+        Debug.Log(nameof(GameManager) + ": Game Paused" );
+        GameMenuManager.Instance.Pause();
+        MusicManager.Instance.Pause();
+        isGamePaused = true;
         Time.timeScale = 0f;
     }
 
@@ -65,37 +70,111 @@ public class GameManager : MonoBehaviour, IGameState
     /// </summary>
     public void UnPause()
     {
-        Debug.Log("UnPause");
-        gmm.UnPause();
-        mm.UnPause();
-        IsGamePaused = false;
+        Debug.Log(nameof(GameManager) + ": Game UnPause " + (GameMenuManager.Instance is null).ToString());
+
+        GameMenuManager.Instance.UnPause();
+        MusicManager.Instance.UnPause();
+
+        isGamePaused = false;
         Time.timeScale = 1f;
     }
 
-    public void SetSpawnAsNull() => currentSpawnPoint = null;
+    private void AddListeners()
+    {
+        if (Controls.Instance != null)
+        {
+            Controls.Instance.UAction_OnEscapePress += GamePauseToggler;
+        }
+    }
+
+    private void RemoveListeners()
+    {
+        if (Controls.Instance != null)
+        {
+            Controls.Instance.UAction_OnEscapePress -= GamePauseToggler;
+        }
+    }
+
+    public void DestorySelf()
+    {
+#if UNITY_EDITOR
+        DestroyImmediate(gameObject);
+#else
+            Destroy(gameObject);
+#endif
+    }
 
     private void CreateSingleton()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
-            Destroy(this);
+#if UNITY_EDITOR
+            DestroyImmediate(gameObject);
+#else
+            Destroy(gameObject);
+#endif
         }
     }
 
 #if UNITY_EDITOR
     private void OnDestroy()
     {
-        PlayerData.SaveData();
+        Instance = null;
     }
 #endif
 
     private void OnApplicationQuit()
     {
-        instance = null;
+        Instance = null;
+    }
+
+    public void SceneUtil_OnActivation()
+    {
+        StopAllCoroutines();
+
+        CurrentSpawnPoint = null;
+        UnPause();
+        Check_SceneIsLevel();
+    }
+
+    private void Check_SceneIsLevel()
+    {
+        switch (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+        {
+            case "PreloaderScene":
+            case "MainMenuScene":
+            case "CreditsScene":
+                sceneIsLevel = false;
+                break;
+
+            default:
+                sceneIsLevel = true;
+                break;
+        }
+    }
+
+    public void SceneUtil_LoadNextScene()
+    {
+        // Nothing needs to be done for now
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+            Time.timeScale = 1f;
+        else
+            Time.timeScale = 0f;
+            
+    }
+
+    private IEnumerator WaitForSeconds()
+    {
+        yield return new WaitForSeconds(Settings.DeathWaitTimer);
+        CurrentSpawnPoint.SpawnPlayer();
     }
 }
 

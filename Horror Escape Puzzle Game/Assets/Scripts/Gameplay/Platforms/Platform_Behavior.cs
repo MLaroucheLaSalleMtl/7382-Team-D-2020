@@ -28,7 +28,7 @@ public class Platform_Behavior : MonoBehaviour
 
         this.gameObject.transform.position = waypoints[0].position;
 
-        InvokeRepeating("CustomUpdate", initDelay, repeateRate);
+        InvokeRepeating(nameof(CustomUpdate), initDelay, repeateRate);
     }
 
     //TODO: Prob make it to have more waypoints? and instead of going to origin, go back to previous waypoint?

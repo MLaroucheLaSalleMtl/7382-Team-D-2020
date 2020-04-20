@@ -91,7 +91,7 @@ public class Slamming_Wall : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         rigid.velocity = Vector2.zero;
-        Invoke("ResetPosition", resetTimer);
+        Invoke(nameof(ResetPosition), resetTimer);
     }
 
     private void ResetPosition()

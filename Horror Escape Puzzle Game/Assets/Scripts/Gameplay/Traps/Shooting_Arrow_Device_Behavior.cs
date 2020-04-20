@@ -57,7 +57,7 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
         switch (firingMode)
         {
             case FiringMode.Auto:
-                InvokeRepeating("Fire", delay, repeatRate);
+                InvokeRepeating(nameof(Fire), delay, repeatRate);
                 break;
 
             case FiringMode.Trigger:
@@ -67,7 +67,7 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
 
             case FiringMode.Burst:  // kind of useless
                 //shoot 3 arrows in succession
-                InvokeRepeating("Burst", delay, repeatRate);
+                InvokeRepeating(nameof(Burst), delay, repeatRate);
                 break;
 
             case FiringMode.Rand:
@@ -83,7 +83,7 @@ public class Shooting_Arrow_Device_Behavior : MonoBehaviour
 
     private void Burst()
     {
-        StartCoroutine("EnumBurst");
+        StartCoroutine(EnumBurst());
     }
 
     private void Fire()
