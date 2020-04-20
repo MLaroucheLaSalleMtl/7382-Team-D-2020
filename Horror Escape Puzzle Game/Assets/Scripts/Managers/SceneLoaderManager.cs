@@ -116,4 +116,12 @@ public class SceneLoaderManager: MonoBehaviour, ISceneUtility
         prefabTransitionFadeOut.SetActive(true);
         ActivateScene();
     }
+
+    public void FadeOut()
+    {
+        prefabTransitionFadeOut.SetActive(true);
+    }
 }
+
+
+

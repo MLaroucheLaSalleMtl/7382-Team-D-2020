@@ -19,6 +19,7 @@ TagManager:
   - Timer
   - InputSystem
   - TransFadeIn
+  - Teleport
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - Ground
   - Projectiles
   - NoCollisionWithPlayer
-  - 
+  - GroundCollisionOnly
   - 
   - 
   - 

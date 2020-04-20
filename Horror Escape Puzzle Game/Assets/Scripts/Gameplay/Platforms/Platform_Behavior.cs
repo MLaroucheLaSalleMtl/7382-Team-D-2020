@@ -45,7 +45,7 @@ public class Platform_Behavior : MonoBehaviour
                 targetWaypoint++;
                 ToggleOff();
                 if (targetWaypoint == waypoints.Length) targetWaypoint = 0;
-                Invoke("ToggleOn", platformIdleTime);
+                Invoke(nameof(ToggleOn), platformIdleTime);
             }
         }
     }

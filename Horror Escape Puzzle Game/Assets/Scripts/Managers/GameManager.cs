@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour, IGameState, ISceneUtility
     {
         // Nothing needs to be done for now
     }
-
+    
     private void OnApplicationFocus(bool focus)
     {
         if (focus)
@@ -176,5 +176,6 @@ public class GameManager : MonoBehaviour, IGameState, ISceneUtility
         yield return new WaitForSeconds(Settings.DeathWaitTimer);
         CurrentSpawnPoint.SpawnPlayer();
     }
+
 }
 

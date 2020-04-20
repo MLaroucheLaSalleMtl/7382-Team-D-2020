@@ -20,6 +20,8 @@ public class Settings : MonoBehaviour
         Screen.SetResolution(1280, 720, false);
 
         LoadSavedSettings();
+
+        ColorblindModePicker((int)colorblindMode);
     }
 
     public void ColorblindModePicker(int value)

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ColorblindSelection : MonoBehaviour
 {
-    [SerializeField] private GameObject[] colorBlindPanel = null;
 
     //private void Awake()
     //{

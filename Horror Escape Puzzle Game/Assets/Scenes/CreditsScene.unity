@@ -971,7 +971,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: dbcb05b73a75af24681c5c105c745066, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 2
   m_InitialTime: 0
@@ -1012,6 +1012,7 @@ GameObject:
   - component: {fileID: 651047318}
   - component: {fileID: 651047323}
   - component: {fileID: 651047322}
+  - component: {fileID: 651047324}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1032,7 +1033,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 1873391361}
-  delay: 3
+  vfxDelay: 0
+  playableDelay: 1
+  playable: {fileID: 582870977}
 --- !u!114 &651047319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1139,6 +1142,29 @@ MonoBehaviour:
             m_StringArgument: MainMenuScene
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 651047324}
+          m_MethodName: Fade_B4_Action
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &651047324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651047317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064d782db183b894382e8d2ed7b11aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &657809029
 PrefabInstance:
   m_ObjectHideFlags: 0

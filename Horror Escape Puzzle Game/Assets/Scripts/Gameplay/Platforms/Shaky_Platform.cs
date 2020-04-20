@@ -35,7 +35,7 @@ public class Shaky_Platform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Invoke("Drop", delayTime);
+        Invoke(nameof(Drop), delayTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

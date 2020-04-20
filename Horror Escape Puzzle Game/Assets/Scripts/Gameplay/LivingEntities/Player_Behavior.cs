@@ -1,5 +1,4 @@
 ﻿using Cinemachine;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -62,6 +61,11 @@ public class Player_Behavior: MonoBehaviour
         if (collision.CompareTag("DeathZone"))
         {
             Death();
+        }
+
+        if (collision.CompareTag("Teleport"))
+        {
+            gameObject.layer = 12; // Ground collision only
         }
     }
 
