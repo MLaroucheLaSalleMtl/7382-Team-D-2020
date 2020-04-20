@@ -10986,5 +10986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: --- DDOL Managers ---
       objectReference: {fileID: 0}
+    - target: {fileID: 5954705448282948271, guid: 9a531b95b0a19e144bd5f0d9c2d163c8,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a531b95b0a19e144bd5f0d9c2d163c8, type: 3}
