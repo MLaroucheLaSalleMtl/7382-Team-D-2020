@@ -1,28 +1,19 @@
 ﻿
 using UnityEngine;
 
-public class GameMenuManager : MonoBehaviour, IGameState
+public class GameMenuManager : MonoBehaviour, IGameState, ISceneUtility
 {
 
     [SerializeField] private GameObject pauseMenu = null;
     [SerializeField] private GameObject deathScreen = null;
 
-    public static GameMenuManager instance = null;
+    public static GameMenuManager Instance = null;
     private Timer timer = null;
 
     private void Awake()
     {
         CreateSingleton();
     } 
-
-    private void Start()
-    {
-        GameObject timerObj = GameObject.FindGameObjectWithTag("Timer");
-
-        if (timerObj) timer = timerObj.GetComponent<Timer>();
-
-        pauseMenu.SetActive(false);
-    }
 
     private void StartTimer()
     {
@@ -46,13 +37,17 @@ public class GameMenuManager : MonoBehaviour, IGameState
     }
     private void CreateSingleton()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
-            Destroy(this);
+#if UNITY_EDITOR
+            DestroyImmediate(gameObject);
+#else
+            Destroy(gameObject);
+#endif
         }
     }
 
@@ -68,8 +63,31 @@ public class GameMenuManager : MonoBehaviour, IGameState
         pauseMenu.SetActive(false);
     }
 
+#if UNITY_EDITOR
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+#endif
+
     private void OnApplicationQuit()
     {
-        instance = null;
+        Instance = null;
+    }
+
+    public void SceneUtil_OnActivation()
+    {
+        StopAllCoroutines();
+
+        GameObject timerObj = GameObject.FindGameObjectWithTag("Timer");
+
+        if (timerObj) timer = timerObj.GetComponent<Timer>();
+
+        pauseMenu.SetActive(false);
+    }
+
+    public void SceneUtil_LoadNextScene()
+    {
+        // Nothing needs to be done for now
     }
 }

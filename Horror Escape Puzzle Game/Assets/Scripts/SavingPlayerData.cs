@@ -33,7 +33,7 @@ public static class PlayerData
         numGamOpentime = PlayerPrefs.GetInt(nameof(numGamOpentime));
 
         numGamOpentime++;
-        Debug.Log(numGamOpentime);
+        Debug.Log(nameof(SavingPlayerData).ToUpper() + ": Num of time App opened: " + numGamOpentime);
     }
 
     public static void SaveData()
@@ -53,9 +53,10 @@ public class SavingPlayerData: MonoBehaviour
     {
         PlayerData.SaveData();
     }
-#endif
+#else
     private void OnApplicationQuit()
     {
         PlayerData.SaveData();
     }
+#endif
 }

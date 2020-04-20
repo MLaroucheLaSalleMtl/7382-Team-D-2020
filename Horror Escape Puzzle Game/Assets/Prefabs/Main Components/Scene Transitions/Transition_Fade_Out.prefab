@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 9060969123789679381}
   - component: {fileID: 9060969123789678824}
   - component: {fileID: 9060969123789679383}
-  - component: {fileID: 9060969123789678826}
+  - component: {fileID: 2121525043}
+  - component: {fileID: 2121525042}
   m_Layer: 5
   m_Name: Transition_Fade_Out
   m_TagString: TransFadeOut
@@ -35,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 435.5, y: 239}
-  m_SizeDelta: {x: 871, y: 478}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9060969123789678824
 CanvasRenderer:
@@ -74,22 +75,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &9060969123789678826
-Animator:
-  serializedVersion: 3
+--- !u!111 &2121525043
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9060969123789679380}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c900681f4fcd3c945b60324c27d6341d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 4b01e543a2145fb45a3d1aa3d495cc1e, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 4b01e543a2145fb45a3d1aa3d495cc1e, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &2121525042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9060969123789679380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0eff308941aeed459029fe8a16099b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

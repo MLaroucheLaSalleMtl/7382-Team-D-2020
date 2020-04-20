@@ -12,7 +12,9 @@ public class Arrow_Behavior : MonoBehaviour
     [SerializeField] private float degreePerSecond = 180f;
 
     public float Speed { set => speed = value; }
-  
+
+    [SerializeField] private GameObject speed_VFX;
+    [SerializeField] private ParticleSystem onHit_VFX;
 
     private void Awake()
     {
@@ -55,11 +57,14 @@ public class Arrow_Behavior : MonoBehaviour
     {
         if (!collision.collider.CompareTag("Trap"))
         {
-            Invoke("DeleteGameobject", 3f);
+            Invoke(nameof(DeleteGameobject), 3f);
             Destroy(rigid);
             Destroy(GetComponent<Collider2D>());
             Destroy(GetComponent<TrailRenderer>());
             Homing = false;
+
+            speed_VFX.SetActive(false);
+            onHit_VFX.Play();
         }
 
         if (collision.collider.CompareTag("Player")) PlayerData.DeathByArrow++;

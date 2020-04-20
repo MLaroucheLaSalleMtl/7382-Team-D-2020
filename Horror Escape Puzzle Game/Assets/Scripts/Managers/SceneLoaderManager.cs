@@ -1,39 +1,22 @@
 ﻿using System.Collections;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class SceneLoaderManager: MonoBehaviour
+public class SceneLoaderManager: MonoBehaviour, ISceneUtility
 {
-    
-    [Tooltip("Enter the Scene Name you want to load")]
-    [SerializeField] private string sceneName = "";
-    [SerializeField] private bool activateScene = false;
+    public static SceneLoaderManager Instance = null;
+
     private AsyncOperation async = null;
     private float waitForSeconds = 3f;
 
-    public static SceneLoaderManager instance = null;
-    private MusicManager mm = null;
+    [SerializeField] private GameObject prefabTransitionFadeOut = null;
+    [SerializeField] private GameObject prefabTransitionFadeIn = null;
 
     private void Awake()
     {
         CreateSingleton();
-
-        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-    }
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        Screen.SetResolution(1280, 720, false);
-
-        async = SceneManager.LoadSceneAsync(sceneName);
-        async.allowSceneActivation = activateScene;
-    }
-
-    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
-    {
-        if (FindObjectOfType<MusicManager>()) mm = GetComponent<MusicManager>();
     }
 
     /// <summary>
@@ -46,7 +29,7 @@ public class SceneLoaderManager: MonoBehaviour
     /// Checks if scene has finished loading.
     /// </summary>
     /// <returns>Return True and False</returns>
-    public bool IsLoaded => Progress == 1f;
+    public bool IsLoaded => Progress >= 1f;
 
 
     /// <summary>
@@ -54,7 +37,7 @@ public class SceneLoaderManager: MonoBehaviour
     /// </summary>
     public void ActivateScene()
     {
-        StartCoroutine("WaitForActivateScene");
+        StartCoroutine(nameof(WaitFor_ActivateScene));
     }
 
     /// <summary>
@@ -62,58 +45,75 @@ public class SceneLoaderManager: MonoBehaviour
     /// </summary>
     public void LoadSceneDirectly(string name)
     {
-        StartCoroutine("WaitForLoadSceneDirectly", name);
+        StartCoroutine(nameof(WaitFor_LoadSceneDirectly), name);
     }
 
-    public void LoadSceneAsync(string scene, bool allowActivation)
+    public void LoadSceneAsync(string scene)
     {
         async = SceneManager.LoadSceneAsync(scene);
-        async.allowSceneActivation = allowActivation;
+        async.allowSceneActivation = false;
     }
 
-    private IEnumerator WaitForLoadSceneDirectly(string name)
+    private IEnumerator WaitFor_LoadSceneDirectly(string name)
     {
-        FadeOutMusic();
         yield return new WaitForSeconds(waitForSeconds);
-        SetPlayerSpawnAsNull();
         SceneManager.LoadScene(name);
+        async.allowSceneActivation = true;
 
+        Debug.Log(nameof(SceneLoaderManager).ToUpper() + ": Scene activation = " + async.allowSceneActivation );
     }
 
-    private IEnumerator WaitForActivateScene()
+    private IEnumerator WaitFor_ActivateScene()
     {
-        FadeOutMusic();
         yield return new WaitForSeconds(waitForSeconds);
+
         if (IsLoaded)
         {
-            SetPlayerSpawnAsNull();
             async.allowSceneActivation = true;
+
+            Debug.Log(nameof(SceneLoaderManager).ToUpper() + ": Scene activation = " + async.allowSceneActivation);
         }
-    }
-
-    private void SetPlayerSpawnAsNull()
-    {
-        if (GameManager.instance != null) GameManager.instance.SetSpawnAsNull();
-    }
-
-    private void FadeOutMusic()
-    {
-        if (mm != null) mm.FadeOut();
     }
 
     private void CreateSingleton()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
-            Destroy(this);
+#if UNITY_EDITOR
+            DestroyImmediate(gameObject);
+#else
+            Destroy(gameObject);
+#endif
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+#endif
+
     private void OnApplicationQuit()
     {
-        instance = null;
+        Instance = null;
+    }
+
+    public void SceneUtil_OnActivation()
+    {
+        StopAllCoroutines();
+
+        prefabTransitionFadeIn.SetActive(true);
+        async.allowSceneActivation = false;
+    }
+
+    public void SceneUtil_LoadNextScene()
+    {
+        prefabTransitionFadeOut.SetActive(true);
+        ActivateScene();
     }
 }

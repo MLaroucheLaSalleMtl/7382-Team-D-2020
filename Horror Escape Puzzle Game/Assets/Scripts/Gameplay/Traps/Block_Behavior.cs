@@ -59,7 +59,7 @@ public class Block_Behavior : MonoBehaviour
         
         if (counter == triggerCounter)
         {
-            Invoke("ActivateTrap", trapActivationDelay);
+            Invoke(nameof(ActivateTrap), trapActivationDelay);
         }
         else
         {
@@ -87,7 +87,7 @@ public class Block_Behavior : MonoBehaviour
         if (counter == triggerCounter)
         {
             boxColl.isTrigger = false;
-            Invoke("ActivateTrap", trapActivationDelay);
+            Invoke(nameof(ActivateTrap), trapActivationDelay);
         }
         else
         {

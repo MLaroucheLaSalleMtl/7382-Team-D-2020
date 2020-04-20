@@ -42,9 +42,8 @@ public class Shaky_Platform : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Invoke("Drop", delayTime);
+            Invoke(nameof(Drop), delayTime);
         }
-
     }
 
     private void Drop()
@@ -65,7 +64,7 @@ public class Shaky_Platform : MonoBehaviour
         rigid.angularVelocity = angularForce;
         coll.enabled = false;
 
-        Invoke("Delete", respawnTimer);
+        Invoke(nameof(Delete), respawnTimer);
     }
 
     private void Delete()

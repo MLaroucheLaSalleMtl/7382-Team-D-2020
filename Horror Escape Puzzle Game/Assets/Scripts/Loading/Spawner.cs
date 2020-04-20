@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-[RequireComponent(typeof(EdgeCollider2D))]
+[RequireComponent(typeof(EdgeCollider2D), typeof(AudioSource))]
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject playerObj = null;
@@ -10,15 +10,26 @@ public class Spawner : MonoBehaviour
     [SerializeField] private bool useGameManager = true;
     private void Start()
     {
-        if(init) SpawnPlayer();
+        if(init)
+        {
+            SpawnPlayer();
+            GameManager.Instance.CurrentSpawnPoint = this;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (useGameManager)
         {
-            GameManager gm = GameManager.instance;
-            if (collision.CompareTag("Player")) gm.currentSpawnPoint = this;
+            if(GameManager.Instance && collision.CompareTag("Player"))
+            {
+                if(GameManager.Instance.CurrentSpawnPoint != this && !init)
+                {
+                    GameManager.Instance.CurrentSpawnPoint = this;
+
+                    GetComponent<AudioSource>().Play();
+                }
+            }
         }
     }
 
@@ -26,8 +37,13 @@ public class Spawner : MonoBehaviour
     {
         Vector3 position = transform.position + new Vector3( 0f, 0.5f);
 
-        if (playerHasVCam) playerObj.GetComponent<Player_Behavior>().HasVCam = true;
+        if (playerHasVCam)
+        {
+            playerObj.GetComponent<Player_Behavior>().HasVCam = true;
+        }
+
         Instantiate(playerObj, position , transform.rotation).transform.parent = null;
+
     }
 
 }
